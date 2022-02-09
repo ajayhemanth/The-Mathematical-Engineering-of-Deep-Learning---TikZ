@@ -30,8 +30,8 @@
     shape border rotate=90,
     right of = rectangle, node distance = 5cm ] (t2) { Decoder\\f\tiny e};    
 
-\node[scale = .8, left of = t1, node distance = 7cm] (inputpic)  {\includegraphics {images/input.png}};
-\node[scale = .8, right of = t2, node distance = 7cm] (outputpic)  {\includegraphics {images/output.png}};
+\node[scale = .8, left of = t1, node distance = 7cm] (inputpic)  {\includegraphics {images/encoder_decoder_input.png}};
+\node[scale = .8, right of = t2, node distance = 7cm] (outputpic)  {\includegraphics {images/encoder_decoder_output.png}};
 
 
 \draw [-stealth] (t1.east) -- (rectangle.west) node[midway,right] {};
