@@ -18,12 +18,12 @@
 \foreach \i in {1,...,\numlayerA}
 {
     \node[circle, draw, minimum size = 10mm] (layerA\i) at (0,-\i*2) {};
-    \draw [-stealth] (layerA\i) -- (layerB) node[pos=.2, above] {W$\i$};
+    \draw [-stealth] (layerA\i) -- (layerB) node[pos=.2, above] {$W_\i$};
 }
 
-\draw [-stealth, double] (layerB.east) -- node[above] {AXON} ++(2,0); 
+\draw [-stealth, double] (layerB.east) -- node[above] {Axon} ++(2,0); 
 
-\node[right of=layerA5, node distance=3cm, align=left] {DENDRITES WITH\\SYNAPTIC WEIGHTS};
+%\node[right of=layerA5, node distance=3cm, align=left] {DENDRITES WITH\\SYNAPTIC WEIGHTS};
 
 
 \end{tikzpicture}
