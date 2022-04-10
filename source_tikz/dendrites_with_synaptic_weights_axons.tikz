@@ -2,85 +2,29 @@
  
 % Required package
 \usepackage{tikz}
- 
+\usetikzlibrary{shapes.geometric}
+
 \begin {document}
  
 % Layer A neurons'number
-\newcommand{\numlayerA}{12} 
- 
-% Layer B neurons'number
-\newcommand{\numlayerB}{12}  
+\newcommand{\numlayerA}{5} 
 
-% Layer C neurons'number
-\newcommand{\numlayerC}{20}   
- 
-% Layer C neurons'number
-\newcommand{\numlayerD}{10} 
- 
+\newcommand{\numlayerB}{1} 
+
 \begin{tikzpicture}
  
-% Layer A
+\node[ellipse, draw=black, minimum width = 2cm, minimum height = 1cm] (layerB) at (6,-6) {Neuron};
+
 \foreach \i in {1,...,\numlayerA}
 {
-    \node[circle, draw, minimum size = 5mm] (layerA\i) at (0,-\i*2) {};
+    \node[circle, draw, minimum size = 10mm] (layerA\i) at (0,-\i*2) {};
+    \draw [-stealth] (layerA\i) -- (layerB) node[pos=.2, above] {W$\i$};
 }
 
-% Layer B
-\foreach \i in {1,...,\numlayerB}
-{
-    \node[circle, draw, minimum size = 5mm ] (layerB\i) at (5,-\i+7*-1) {};
-}
+\draw [-stealth, double] (layerB.east) -- node[above] {AXON} ++(2,0); 
 
-% Layer C
-\foreach \i in {1,...,\numlayerC}
-{
-    \node[circle, draw, minimum size = 5mm ] (layerC\i) at (10,-\i+3*-1) {};
-}
+\node[right of=layerA5, node distance=3cm, align=left] {DENDRITES WITH\\SYNAPTIC WEIGHTS};
 
-% Layer D
-\foreach \i in {1,...,\numlayerD}
-{
-    \node[circle, draw, minimum size = 5mm ] (layerD\i) at (15,-\i+7*-1) {};
-}
-
-% Connect neurons between hidden layers - Can use is if we can have error handling in tixz
-%\foreach \i [evaluate=\i as \in using int(\i+1) ] in {1,2,3}
-%{
-%    \foreach \j  in {1,...,\numlayerC}
-%    {
-%        \foreach \k  in {1,...,\numlayerC}
-%        {
-%            \draw[] (layer\i\j) -- (layer\in\k);
-%        }
-%    }
-%} 
-
-%connect Layer A and Layer B
-\foreach \i in {1,...,\numlayerA}
-{
-    \foreach \j in {1,...,\numlayerB}
-    {
-      \draw[] (layerA\i) -- (layerB\j);   
-    }
-} 
-
-%connect Layer B and Layer C
-\foreach \i in {1,...,\numlayerB}
-{
-    \foreach \j in {1,...,\numlayerC}
-    {
-      \draw[] (layerB\i) -- (layerC\j);   
-    }
-} 
-
-%connect Layer C and Layer D
-\foreach \i in {1,...,\numlayerC}
-{
-    \foreach \j in {1,...,\numlayerD}
-    {
-      \draw[] (layerC\i) -- (layerD\j);   
-    }
-} 
 
 \end{tikzpicture}
  
