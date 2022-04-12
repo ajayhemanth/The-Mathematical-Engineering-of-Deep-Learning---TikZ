@@ -1,8 +1,8 @@
-# tixz-images
-    Repository to share the tixz code and its corresponding pdf files
+# TikZ-images
+    Repository to share the TikZ code and its corresponding pdf files
 
 # Structure
-    tikx files and its corresponding files are organised as <chaptername>.<imagenumber>.<subimagenumber>_<descriptive_text>
+    TikZ files and its corresponding files are organised as <chaptername>.<imagenumber>.<subimagenumber>_<descriptive_text>
     images are put in images folder.
 
 # Code design
@@ -13,4 +13,4 @@
 # todo
     Colors and fonts can be made uniform
     Scale and size can be tweaked for consistency
-    Custom images used inside tikz code to be replaced with higher quality images
+    Custom images used inside TikZ code to be replaced with higher quality images
