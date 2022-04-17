@@ -1,0 +1,61 @@
+\documentclass[tikz, border=20pt]{standalone}
+
+\usepackage{tikz}
+\usepackage[]{geometry}
+\usepackage{medl_colors}
+\graphicspath{ {./images/} } 
+
+\usetikzlibrary{shapes.multipart}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{3d}
+\usetikzlibrary{matrix,decorations.pathreplacing, calc, positioning,fit}
+
+
+\begin{document}
+\begin{tikzpicture}
+
+\newcommand\cube[6]
+{
+\draw (#1+#4,#2,#3) -- (#1,#2,#3) -- (#1,#2+#5,#3);
+\draw (#1+#4,#2,#3) -- (#1+#4,#2,#3+#6) -- (#1+#4,#2+#5,#3+#6) -- (#1+#4,#2+#5,#3) -- cycle;
+\draw (#1+#4,#2+#5,#3) -- (#1,#2+#5,#3) -- (#1,#2+#5,#3+#6) -- (#1+#4,#2+#5,#3+#6);
+}
+
+\node[rectangle split, rectangle split parts=2, rectangle split horizontal, rectangle split draw splits=false, minimum height=3cm, draw] (A) {
+    \nodepart[text width=1cm]{one}
+    \nodepart[text width=1cm]{two}
+};
+
+\draw[densely dashed] (A.north) -- (A.south);
+
+\draw[draw, -] ([yshift=-0.1cm]A.one north) -- ([yshift=0.1cm]A.one south) node[midway, anchor=center, fill=white] {$x$}+(0,1mm);
+\draw[draw, -] ([yshift=-0.1cm]A.two north) -- ([yshift=0.1cm]A.two south) node[midway, anchor=center, fill=white] {$y$};
+
+\cube{3}{-1.2}{0}{3}{2}{-1.5}
+
+\node[ellipse, draw=black, minimum width = 3cm, minimum height = 2.5cm,  align=center] (model) at (11,0) {Model\\(Prediction Algorithm)};
+
+\node[scale = .25] (inputpic) at (16,0) {\includegraphics {images/earth.jpeg}};
+
+\matrix [matrix of math nodes, above of =inputpic, node distance = 2cm,left delimiter={[},right delimiter={]} ] (matrix){ 
+    - & x^* & - \\
+};
+
+\node[below of=inputpic, node distance=2cm](sum) {$y^*$}; 
+\node[right of=inputpic, align=center, node distance=2cm] {Real World};
+\node[align=center] at (4.5,0) {Learning\\Algorithm};
+\node[above of=A, align=center, node distance=2cm] (training) {Training\\Data};
+
+\draw [-stealth, draw=green1, line width=1mm ] (sum.north) -- (inputpic.south) node[] {};
+\draw [-stealth, draw=green1, line width=1mm ] (inputpic.north) to (matrix.south) node[] {};
+\draw [-stealth, draw=green1, line width=1mm] (matrix.west)+(-.2cm,0) to [bend right,looseness = 1] (model.north) node[] {};
+\draw [-stealth,draw=green1, line width=1mm] (model.south)+(0,-.1cm) to [bend right,looseness = 1] (sum) node[] {};
+\draw [-stealth, draw=green1, line width=1mm] (A.east)+(.1cm,0) -- node[] (arrow1) {} ++(1.6,0);
+\draw [-stealth, draw=green1, line width=1mm] (model.west)+(-2.1cm,0) to (model.west) node[] (arrow1) {};
+\draw [-stealth, dashed, draw=green1, line width=1mm] (matrix.north)+(0,.2cm) to [bend right,looseness = 1] (training.north) node[] {};
+
+
+\end{tikzpicture}
+
+\end{document}
+
