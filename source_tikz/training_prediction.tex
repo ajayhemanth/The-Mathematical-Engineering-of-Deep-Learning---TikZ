@@ -3,11 +3,12 @@
 \usepackage{tikz}
 \usepackage{geometry}
 \usepackage{medl_colors}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 
-\usetikzlibrary{shapes.multipart, shapes.geometric}
+\usetikzlibrary{shapes.multipart, shapes.geometric, arrows.meta}
 \usetikzlibrary{matrix,decorations.pathreplacing, calc, positioning,fit}
 
-\graphicspath{ {./images/} }
 
 \begin{document}
 
@@ -32,21 +33,20 @@
 
 \node[ellipse, draw=black, minimum width = 3cm, minimum height = 2.5cm,  align=center] (model) at (11,0) {Model\\(Prediction Algorithm)};
 
-\node[scale = .25] (inputpic) at (18,0) {\includegraphics {images/earth.jpeg}};
+\node[scale = .3] (inputpic) at (18,0) {\includegraphics {images/earth.jpeg}};
 
 
 \node[above of=rect1, align=center, node distance=2cm] (training) {Training\\Data};
-\node[align=center] at (4.5,0) {Learning\\Algorithm};
+\node[align=center] at (4.6,-.1) {Learning\\Algorithm};
 \node[right of=inputpic, align=center, node distance=1.6cm] {Real\\World};
 
-\draw [-stealth, draw=green1, line width=1mm] (rect1.east)+(.1cm,0) -- node[] {} ++(2,0);
-\draw [-stealth, draw=green1, line width=1mm] (model.west)+(-2.1cm,0) to (model.west) node[] (arrow1) {};
+\draw [-Triangle, draw=green1, line width=1mm] (rect1.east)+(.1cm,0) -- node[] {} ++(2,0);
+\draw [-Triangle, draw=green1, line width=1mm] (model.west)+(-2.1cm,0) to (model.west) node[] (arrow1) {};
 
-\path (model) edge [-stealth,out=270,in=270,draw=green1, line width=1mm] node [midway, anchor=center, fill=white] {$\hat{y}$} (inputpic);
+\path (model) edge [-Triangle,out=270,in=270,draw=green1, line width=1mm] node [midway, anchor=center, fill=white] {$\hat{y}$} (inputpic);
+\path (model) edge [Triangle-,out=90,in=90,draw=green1, line width=1mm] node [midway, anchor=center, fill=white] {$ [ -\hspace{.5cm}  \tilde{x} \hspace{.5cm} - ] $} (inputpic);
 
-\path (model) edge [-stealth,out=90,in=90,draw=green1, line width=1mm] node [midway, anchor=center, fill=white] {$ [ -\hspace{.5cm}  x^* \hspace{.5cm} - ] $} (inputpic);
-
-\path (inputpic) edge [-stealth,dashed, out=80,in=100,draw=green1, line width=1mm] node [] {} (training);
+\path (inputpic) edge [-Triangle,dashed, out=80,in=80,draw=green1, line width=1mm] node [] {} (training);
 
 \end{tikzpicture}
 
