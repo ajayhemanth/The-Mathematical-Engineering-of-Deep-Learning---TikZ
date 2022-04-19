@@ -9,7 +9,6 @@
 \usetikzlibrary{shapes.multipart, shapes.geometric, arrows.meta}
 \usetikzlibrary{matrix,decorations.pathreplacing, calc, positioning,fit}
 
-
 \begin{document}
 
 \begin{tikzpicture}
@@ -20,7 +19,7 @@
 \draw (#1+#4,#2,#3) -- (#1+#4,#2,#3+#6) -- (#1+#4,#2+#5,#3+#6) -- (#1+#4,#2+#5,#3) -- cycle;
 \draw (#1+#4,#2+#5,#3) -- (#1,#2+#5,#3) -- (#1,#2+#5,#3+#6) -- (#1+#4,#2+#5,#3+#6);
 }
-
+%Training Data
 \node[rectangle split, rectangle split parts=2, rectangle split horizontal, rectangle split draw splits=false, minimum height=3cm, draw] (rect1) {
     \nodepart[text width=1.2cm]{one}
     \nodepart[text width=.3cm]{two}
@@ -28,24 +27,24 @@
 \draw[densely dashed] (rect1.one split north) -- (rect1.one split south);
 \draw[draw, -] ([yshift=-0.1cm]rect1.two north) -- ([yshift=0.1cm]rect1.two south) node[midway, anchor=center, fill=white] {$y$}+(0,1mm);
 \draw[draw, -] ([yshift=-0.1cm]rect1.one north) -- ([yshift=0.1cm]rect1.one south) node[midway, anchor=center, fill=white] {$x$};
+\node[above of=rect1, align=center, node distance=2cm] (training) {Training\\Data};
 
+%Learning Algorithm Cube
 \cube{3}{-1.2}{0}{3}{2}{-1.5}
+\node[align=center] at (4.6,-.1) {Learning\\Algorithm};
 
+%model
 \node[ellipse, draw=black, minimum width = 3cm, minimum height = 2.5cm,  align=center] (model) at (11,0) {Model\\(Prediction Algorithm)};
 
+%Real world
 \node[scale = .3] (inputpic) at (18,0) {\includegraphics {images/earth.jpeg}};
-
-
-\node[above of=rect1, align=center, node distance=2cm] (training) {Training\\Data};
-\node[align=center] at (4.6,-.1) {Learning\\Algorithm};
 \node[right of=inputpic, align=center, node distance=1.6cm] {Real\\World};
 
+%Arrows
 \draw [-Triangle, draw=green1, line width=1mm] (rect1.east)+(.1cm,0) -- node[] {} ++(2,0);
 \draw [-Triangle, draw=green1, line width=1mm] (model.west)+(-2.1cm,0) to (model.west) node[] (arrow1) {};
-
 \path (model) edge [-Triangle,out=270,in=270,draw=green1, line width=1mm] node [midway, anchor=center, fill=white] {$\hat{y}$} (inputpic);
 \path (model) edge [Triangle-,out=90,in=90,draw=green1, line width=1mm] node [midway, anchor=center, fill=white] {$ [ -\hspace{.5cm}  \tilde{x} \hspace{.5cm} - ] $} (inputpic);
-
 \path (inputpic) edge [-Triangle,dashed, out=80,in=80,draw=green1, line width=1mm] node [] {} (training);
 
 \end{tikzpicture}
