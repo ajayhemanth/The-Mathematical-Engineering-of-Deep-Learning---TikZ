@@ -10,72 +10,40 @@
 \usetikzlibrary{positioning}
 
 \pgfplotsset{compat=1.17}
-
 \begin{document}
 
 \begin{tikzpicture}
-
-%Bar 1
-\node[rectangle split, rectangle split parts=5, rectangle split horizontal, rectangle split draw splits=false, rectangle split part fill={orange1, green2}, minimum height=1cm, draw] (A) {
+\newcommand\medlblock[5]
+{
+    \node[ below of=#4, node distance=#5, rectangle split, rectangle split parts=5, rectangle split horizontal, rectangle split draw splits=true, rectangle split part fill={#2}, minimum height=1cm, draw] (#1) {
     \nodepart[text width=2cm]{one}
     \nodepart[text width=2cm]{two}
     \nodepart[text width=2cm]{three}
     \nodepart[text width=4cm, align=center]{four} ...
     \nodepart[text width=2cm]{five}
 };
+\draw [-Triangle] (#1.east)+(.1cm,0) -- node[] (arrow#1) {} ++(.8,0);
+\node[align=center, right of=arrow#1, node distance=1.3cm] {$E^{(#3)}$\tiny hold-out};
+\node[align=center, left of=#1, node distance=7.3cm] {$\iota$ = #3};
+}
 
-\draw[] (A.one split north) -- (A.one split south);
-\draw[densely dashed] (A.two split north) -- (A.two split south);
-\draw[densely dashed] (A.three split north) -- (A.three split south);
-\draw[densely dashed] (A.four split north) -- (A.four split south);
-\draw [-Triangle] (A.east)+(.1cm,0) -- node[] (arrowA) {} ++(.8,0);
-\node[align=center, right of=arrowA, node distance=1.3cm] {$E^{(1)}$\tiny hold-out};
-\node[align=center, left of=A, node distance=7.3cm] {$\iota$ = 1};
-
+%root
+\node[draw] (root){}; 
+\medlblock{A}{pink1,cyan!20}{1}{root}{0};
 \draw[decorate, decoration={brace, raise=.8cm, amplitude=15pt}] (-6.5,0) -- (-4.5,0) node[above=1.4cm]{Validation Data};
 \draw[decorate, decoration={brace, raise=.8cm, amplitude=15pt}] (-4.3,0) -- (6.5,0) node[pos=0.5,above=1.4cm]{Training Data};
 
 %Bar 2
-\node[draw, below of=A, node distance=2.5cm, rectangle split, rectangle split parts=5, rectangle split horizontal, rectangle split draw splits=false, rectangle split part fill={green2, orange1, green2}, minimum height=1cm] (B) {
-    \nodepart[text width=2cm]{one}
-    \nodepart[text width=2cm]{two}
-    \nodepart[text width=2cm]{three}
-    \nodepart[text width=4cm, align=center]{four} ...
-    \nodepart[text width=2cm]{five}
-};
-\draw[] (B.one split north) -- (B.one split south);
-\draw[] (B.two split north) -- (B.two split south);
-\draw[densely dashed] (B.three split north) -- (B.three split south);
-\draw[densely dashed] (B.four split north) -- (B.four split south);
-\draw [-Triangle] (B.east)+(.1cm,0) -- node[] (arrowB) {} ++(.8,0);
-\node[align=center, right of=arrowB, node distance=1.3cm] {$E^{(2)}$\tiny hold-out};
-\node[align=center, left of=B, node distance=7.3cm] {$\iota$ = 2};
-
+\medlblock{B}{cyan!20, pink1, cyan!20}{2}{A}{2.5cm};
 
 %seperator
 \node[align=center, below of=B, node distance=1.5cm, font=\bfseries] (sep) {.\\.\\.};
 
 %Bar 3
-\node[draw, below of=sep, node distance=1.5cm, rectangle split, rectangle split parts=5, rectangle split horizontal, rectangle split draw splits=false, rectangle split part fill={green2, green2, green2, green2, orange1}, minimum height=1cm] (C) {
-    \nodepart[text width=2cm]{one}
-    \nodepart[text width=2cm]{two}
-    \nodepart[text width=2cm]{three}
-    \nodepart[text width=4cm, align=center]{four} ...
-    \nodepart[text width=2cm]{five}
-};
-\draw[densely dashed] (C.one split north) -- (C.one split south);
-\draw[densely dashed] (C.two split north) -- (C.two split south);
-\draw[densely dashed] (C.three split north) -- (C.three split south);
-\draw[] (C.four split north) -- (C.four split south);
-\draw [-Triangle] (C.east)+(.1cm,0) -- node[] (arrowC) {} ++(.8,0);
-\node[align=center, right of=arrowC, node distance=1.3cm] {$E^{(k)}$\tiny hold-out};
-\node[align=center, left of=C, node distance=7.3cm] {$\iota$ = k};
-\draw[decorate, decoration={brace, raise=.8cm, amplitude=15pt, mirror}] (-6.5,-5.5) -- (4.3,-5.5) node[pos=0.5,below=1.4cm]{Validation Data};
-\draw[decorate, decoration={brace, raise=.8cm, amplitude=15pt,mirror}] (4.5, -5.5) -- (6.5, -5.5) node[pos=0.5, below=1.4cm]{Training Data};
-
-%\draw[xshift=-0.5cm, decorate, decoration={brace, raise=.8cm, amplitude=15pt, mirror}] (C.five) -- (C.east) node[pos=0.5,below=1.4cm]{Training Data};
+\medlblock{C}{cyan!20, cyan!20, cyan!20, cyan!20, pink1}{k}{sep}{1.5cm};
+\draw[decorate, decoration={brace, raise=.8cm, amplitude=15pt, mirror}] (-6.5,-5.5) -- (4.3,-5.5) node[pos=0.5,below=1.4cm]{Training Data};
+\draw[decorate, decoration={brace, raise=.8cm, amplitude=15pt,mirror}] (4.5, -5.5) -- (6.5, -5.5) node[pos=0.5, below=1.4cm]{Validation Data};
 
 \end{tikzpicture}
- 
 \end{document}
 
