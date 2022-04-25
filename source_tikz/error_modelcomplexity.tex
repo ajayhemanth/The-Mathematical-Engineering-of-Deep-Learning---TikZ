@@ -16,7 +16,8 @@
 
 \newcommand\medlsquare[7]
 {
-    \addplot[thick, draw=gray!20,fill=#6] coordinates { (#1, #2) (#1+#3, #2) (#1+#3, #2+#4) (#1, #2+#4) (#1, #2)} node[align=center] at (#1+#3/2, #4-.7) {#7};
+    \addplot[thick, draw=gray!20,fill=#6] coordinates { (#1, #2) (#1+#3, #2) (#1+#3, #2+#4) (#1, #2+#4) (#1, #2)} node[] {};
+    \path[draw, Triangle-Triangle] ([yshift=-0.4cm]#1+#3, #2+#4) -- ([yshift=-0.4cm]#1, #2+#4) node[midway,anchor=center, fill=#6] {#7};
 }
 
 \begin{axis}[
@@ -40,9 +41,10 @@
 \medlsquare{1}{.2}{5}{14}{A}{yellow2}{Under-fitting}
 \medlsquare{14}{.2}{7}{14}{B}{pink1}{Over-fitting}
 
-\addplot[thick, loosely dashed] coordinates {(10, .4) (10, 6)} node[align=center] at (10,7) {Optimal Model};;
+\addplot[thick, loosely dashed] coordinates {(7.7, .4) (7.7, 6)} node[align=center] at (7.9,7) {Optimal Model};
 
 \path (1.5,13) edge [out=280,in=200,draw=red, line width=.7mm] node [pos=.9, above=.5] {$\tilde{E}${\tiny unseen}} (21,11);
+
 \path (1.5,13) edge [out=280,in=175,draw=green1, line width=.7mm] node [pos=.9, above=.5] {$\tilde{E}${\tiny train}} (21,1);
 
 \end{axis}
