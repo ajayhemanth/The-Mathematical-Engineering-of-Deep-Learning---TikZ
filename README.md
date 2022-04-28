@@ -1,16 +1,3 @@
-# TikZ-images
-    Repository to share the TikZ code and its corresponding pdf files
-
-# Structure
-    TikZ files and its corresponding files are organised as <chaptername>.<imagenumber>.<subimagenumber>_<descriptive_text>
-    images are put in images folder.
-
-# Code design
-    Loops are used whereever possible for re-usability.
-    Loops control variables are added global.
-    Relative postions are used whereever possible for easier modification.
-
-# todo
-    Colors and fonts can be made uniform
-    Scale and size can be tweaked for consistency
-    Custom images used inside TikZ code to be replaced with higher quality images
+# Introduction
+    This repository contains the TikZ code (and its corresponding pdf files) to generate images used in "The Mathematical Engineering of Deep Learning" book. 
+    The actual book content is available on deeplearningmath.org or (when it is out) purchase the book from CRC press. General supporting material for the book can be found in [this repo](https://github.com/yoninazarathy/MathematicalEngineeringDeepLearning).
