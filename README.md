@@ -1,5 +1,5 @@
 # Introduction
-This repository contains the TikZ code (and its corresponding pdf files) to generate images used in "The Mathematical Engineering of Deep Learning" book.  
+This repository contains the TikZ code (and its corresponding pdf files) to generate images used in [The Mathematical Engineering of Deep Learning](https://deeplearningmath.org/) book.  
 
 The actual book content is available on deeplearningmath.org or (when it is out) purchase the book from CRC press.  
 
