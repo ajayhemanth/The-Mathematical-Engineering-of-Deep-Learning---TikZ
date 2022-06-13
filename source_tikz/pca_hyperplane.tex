@@ -1,0 +1,34 @@
+\documentclass[tikz, border=50pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usepackage{graphicx}
+\usetikzlibrary{shapes.multipart, shapes.geometric, arrows.meta}
+\usetikzlibrary{matrix, calc, positioning,fit}
+\usepackage{xstring}
+
+\begin{document}
+\begin{tikzpicture}
+
+%input picture
+\node[scale = .2] (aepoints)  {\includegraphics {images/ae_points.pdf}};
+
+\node[scale = .2, below of=aepoints, node distance=15cm, xshift=-14cm] (pcacodepoints)  {\includegraphics[trim={0 6cm 0 6cm},clip] {images/pca_code_points.pdf}};
+\node[scale = .2, below of=aepoints, node distance=13.5cm, xshift=14cm] (aecodepoints)  {\includegraphics[trim={0 6cm 0 6cm},clip] {images/ae_code_points.pdf}};
+
+\node[scale = .2, below of=pcacodepoints, node distance=20cm, xshift=-15cm] (pcaprojectionpoints)  {\includegraphics{images/pca_projection_points.pdf}};
+\node[scale = .2, below of=aecodepoints, node distance=20cm, xshift=14cm] (aeprojectionpoints)  {\includegraphics {images/ae_projection_points.pdf}};
+
+%lables
+\node[above of=aepoints, align=center, node distance=2cm](toutput) {Original Data};
+\draw[-Triangle, thick] (aepoints) -- (pcacodepoints) node[midway, anchor=east, yshift=.2cm, align=center]{PCA Encoding};   
+\draw[-Triangle, thick] (aepoints) -- (aecodepoints)node[midway, anchor=west, align=center]{Non-linear Autoencoder\\Encoding};
+\draw[-Triangle, thick] (pcacodepoints) -- (pcaprojectionpoints)node[midway, anchor=east, align=center, yshift=.3cm]{PCA Decoding}; 
+\draw[-Triangle, thick] (aecodepoints) -- (aeprojectionpoints)node[midway, anchor=west, align=center]{Non-linear Autoencoder\\Decoding};
+
+%markings on the plots
+\node[above of=pcaprojectionpoints, align=center, yshift=-1cm, xshift=-1cm, rotate=40](toutput) {Projection on a \\hyper plane};
+\node[above of=aeprojectionpoints, align=center, yshift=-1cm, xshift=-1cm, rotate=40](toutput) {Projection on a \\manifold};
+
+\end{tikzpicture}
+\end{document}
