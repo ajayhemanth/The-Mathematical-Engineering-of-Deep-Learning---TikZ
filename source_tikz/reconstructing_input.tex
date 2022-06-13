@@ -25,12 +25,29 @@
             \node [draw=green2, circle, minimum size=.6cm, fill=green0] (circle#1\i) at(#2, -\i+4) {};
         }
         {
-            \MemberQ{2,3,6}{\i}
+            \MemberQ{2,5,6}{\i}
             \ifmember
             {
                 \node [draw=green2, circle, minimum size=.6cm] (circle#1\i) at(#2, -\i+4) {};
-                \draw[rotate = 45] (circle#1\i.north) -- (circle#1\i.south);
-                \draw[rotate = 45] (circle#1\i.west) -- (circle#1\i.east);
+                \begin{scope}
+                \clip(#2, -\i+4) circle(.3cm);
+                \foreach \p in {.03, .06, .09, .12, .15, .18, .20, .24, .22}
+                { 
+                    \foreach \q in {.04, .08, .12, .15, .18, .21}
+                    { 
+                        \fill (#2, -\i+4) circle (0.01);
+                        \fill (#2, -\i+4+\q) circle (0.01);
+                        \fill (#2, -\i+4-\q) circle (0.01);
+                        \fill (#2+\p, -\i+4) circle (0.01);
+                        \fill (#2+\p, -\i+4+\q) circle (0.01);
+                        \fill (#2+\p, -\i+4-\q) circle (0.01);
+                        \fill (#2-\p, -\i+4) circle (0.01);
+                        \fill (#2-\p, -\i+4+\q) circle (0.01);
+                        \fill (#2-\p, -\i+4-\q) circle (0.01);
+                    }
+                }
+                \end{scope}
+
             }
             \else%
             {
@@ -41,7 +58,8 @@
     }
 }
 
-\node (rect) at (0,0) [draw,fill=pink1, minimum width=1.5cm,minimum height=2cm] (rectangle)  {C};
+%center part
+\node (rect) at (0,0) [draw,fill=pink1, minimum width=1.5cm,minimum height=2cm] (rectangle)  {Bottleneck};
 
 \node[trapezium,
     draw = green2,
@@ -51,7 +69,7 @@
     trapezium angle=80,
     minimum height=3cm,
     shape border rotate=270,
-    left of = rectangle, node distance = 4cm ] (t1) { Encoder\\E};  
+    left of = rectangle, node distance = 4cm ] (t1) { Encoder};  
 
 \node[trapezium,
     draw = blue1,
@@ -61,39 +79,40 @@
     trapezium angle=80,
     minimum height=3cm,
     shape border rotate=90,
-    right of = rectangle, node distance = 4cm ] (t2) { Decoder\\D};    
+    right of = rectangle, node distance = 4cm ] (t2) { Decoder};    
 
+%input
 \node[left of = t1, node distance = 4cm, draw=green2, fill=green0, minimum width=1cm,minimum height=8cm ] (input) {};
+\circles{1}{-8}{2};
+\circles{2}{-10}{2};
+\circles{3}{-12}{1};
 
-\node[right of = t2, node distance = 4cm, draw=blue1,fill=blue0, minimum width=1cm,minimum height=8cm] (output)  {x\textquotesingle};
+%output
+\node[right of = t2, node distance = 4cm, draw=blue1,fill=blue0, minimum width=1cm,minimum height=8cm] (output)  {};
+\node [draw=yellow2, circle, minimum size=1cm, fill=yellow2] (circleout) at(output) {};
 
+%arrows
 \draw [-Triangle] (t1.east) -- (rectangle.west) node[midway,right] {};
 \draw [-Triangle] (rectangle.east) -- (t2.west) node[midway,right] {};
 \draw [-Triangle] (input.east) -- (t1.west) node[midway,right] {};
 \draw [-Triangle] (t2.east) -- (output.west) node[midway,right] {};
 
-\circles{1}{-8}{2};
-\circles{2}{-10}{2};
-\circles{3}{-12}{1};
+%production system
+\node[dashed, draw=orange1, rounded corners, draw, inner xsep = 9cm, inner ysep=6cm] at(0.2, 0) (production){};
+\node[below of=production, align=center, node distance=5.5cm] {Production System};
 
-\node[scale = .5, below of = circle17, node distance = 4cm] (inputpic1)  {\includegraphics {images/partially_destroyed_input.png}};
-\node[scale = .5, below of = circle27, node distance = 4cm] (inputpic2)  {\includegraphics {images/partially_destroyed_input.png}};
-\node[scale = .5, below of = circle37, node distance = 4cm] (inputpic3)  {\includegraphics {images/original_input.png}};
-\node[scale = .5, below of = output, node distance = 10cm] (outputpic)  {\includegraphics {images/original_input.png}};
+%bottom images
+\node[scale = .3, below of = circle17, node distance = 6cm] (inputpic1)  {\includegraphics {images/partially_destroyed_input.png}};
+\node[scale = .3, below of = circle27, node distance = 6cm] (inputpic2)  {\includegraphics {images/partially_destroyed_input.png}};
+\node[scale = .3, below of = circle37, node distance = 6cm] (inputpic3)  {\includegraphics {images/original_input.png}};
+\node[scale = .3, below of = output, node distance = 16cm] (outputpic)  {\includegraphics {images/original_input.png}};
 
-
-
-\node[above of=rectangle, align=center, node distance=2cm] {Bottleneck!};
-\node[above of=circle11, align=center, node distance=2cm] {Input\\$\tilde X$};
-\node[above of=circle21, align=center, node distance=2cm] {Partially\\Destroyed\\Input};
-\node[above of=circle31, align=center, node distance=2cm] (tinput) {Original\\Input\\X};
+%lables
+\node[above of=circle11, align=center, node distance=2cm] {Input};
+\node[above of=circle21, align=center, node distance=2cm] {Partially\\Destroyed\\Training\\Data};
+\node[above of=circle31, align=center, node distance=2cm] (tinput) {Original\\Training \\Data};
 \node[above of=output, align=center, node distance=5cm](toutput) {Reconstructed\\Input};
 
-\draw[dashed] ([yshift=1cm]tinput.north) -- ([yshift=1cm]toutput.north) node[midway,anchor=center, fill=white](tcenter) {Ideally they are identical};
-\node[below of = tcenter, node distance = .5cm] {$\tilde X \approx X$\textquotesingle};
-
-\draw[dashed,-Triangle] ([yshift=1cm]tinput.north) -- (tinput.north); 
-\draw[dashed,-Triangle] ([yshift=1cm]toutput.north) -- (toutput.north); 
 
 \end{tikzpicture}
 \end{document}
