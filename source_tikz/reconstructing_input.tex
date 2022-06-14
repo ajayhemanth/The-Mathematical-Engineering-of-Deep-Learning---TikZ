@@ -89,13 +89,15 @@
 
 %output
 \node[right of = t2, node distance = 4cm, draw=blue1,fill=blue0, minimum width=1cm,minimum height=8cm] (output)  {};
-\node [draw=yellow2, circle, minimum size=1cm, fill=yellow2] (circleout) at(output) {};
+\circles{4}{8}{1};
 
 %arrows
 \draw [-Triangle] (t1.east) -- (rectangle.west) node[midway,right] {};
 \draw [-Triangle] (rectangle.east) -- (t2.west) node[midway,right] {};
 \draw [-Triangle] (input.east) -- (t1.west) node[midway,right] {};
 \draw [-Triangle] (t2.east) -- (output.west) node[midway,right] {};
+\draw [-Triangle] ([xshift=1mm]circle34.east) -- ([xshift=-1mm]circle24.west) node[midway,right] {};
+\draw [-Triangle] ([xshift=1mm]circle24.east) -- ([xshift=-2mm]circle14.west) node[midway,right] {};
 
 %production system
 \node[dashed, draw=orange1, rounded corners, draw, inner xsep = 9cm, inner ysep=6cm] at(0.2, 0) (production){};
