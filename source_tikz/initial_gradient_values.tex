@@ -1,0 +1,87 @@
+\documentclass[border=0.2cm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc}
+\usetikzlibrary{cd, fit, calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usepackage{medl_colors}
+
+\begin{document}
+\begin{tikzpicture}
+
+%Nodes
+\matrix[row sep=2cm,column sep=1.8cm] (m1) {
+    &
+    \node [align=center] (node11) {$\theta^{[1]}$}; &
+    \node [align=center] (node12) {$\theta^{[2]}$}; &
+    \node [align=center] (node13) {$\theta^{[L-1]}$}; &
+    \node [align=center] (node14) {$\theta^{[L]}$}; &
+    \\
+    \node [align=center] (node20) {$x = a^{[0]}$}; &
+    \node [align=center] (node21) {$a^{[1]}$}; &
+    \node [align=center] (node22) {$a^{[2]}$}; &
+    \node [align=center] (node23) {$a^{[L-1]}$}; &
+    \node [align=center] (node24) {$a^{[L]}$}; &
+    \\
+    &
+    \node [align=center] (node30) {\Huge $,$}; &
+    \node [align=center] (node31) {$\zeta^{[1]}$}; &
+    \node [align=center] (node32) {$\zeta^{[2]}$}; &
+    \node [align=center] (node33) {$\zeta^{[L-1]}$}; &
+    \node [align=center] (node34) {$\zeta^{[L]}$}; &
+    \\
+    &
+    \node [align=center] (node41) {$g^{[1]}$}; &
+    \node [align=center] (node42) {$g^{[2]}$}; &
+    \node [align=center] (node43) {$g^{[L-1]}$}; &
+    \node [align=center] (node44) {$g^{[L]}$}; &
+    \\
+   };
+
+\node[rounded corners, draw, right of = node24, node distance = 2.5cm] (nodec) {Cost : C};
+
+\draw [loosely dashed] ([xshift=1.4cm]node12.east) -- ([xshift=-1.5cm]node13.west) node[] {}; 
+\draw [loosely dashed] ([xshift=1.4cm]node22.east) -- ([xshift=-1.5cm]node23.west) node[] {}; 
+\draw [loosely dashed] ([xshift=1.4cm]node32.east) -- ([xshift=-1.5cm]node33.west) node[] {}; 
+\draw [loosely dashed] ([xshift=1.4cm]node42.east) -- ([xshift=-1.5cm]node43.west) node[] {}; 
+
+\draw [-Triangle] ([xshift=1.8cm]node20.west) -- ([xshift=-1.2cm]node21.east);
+\draw [-Triangle] ([xshift=1.1cm]node21.west) -- ([xshift=-1.1cm]node22.east);
+\draw [-Triangle] ([xshift=1.4cm]node23.west) -- ([xshift=-1.4cm]node24.east);
+
+\draw [-Triangle] ([xshift=1.4cm]node31.east) -- ([xshift=-1.4cm]node32.west);
+\draw [-Triangle] ([xshift=1.4cm]node33.east) -- ([xshift=-1.4cm]node34.west);
+
+\draw [-Triangle] ([yshift=-2mm]node11.south) -- ([yshift=2mm]node21.north);
+\draw [-Triangle] ([yshift=-2mm]node12.south) -- ([yshift=2mm]node22.north);
+\draw [-Triangle] ([yshift=-2mm]node13.south) -- ([yshift=2mm]node23.north);
+\draw [-Triangle] ([yshift=-2mm]node14.south) -- ([yshift=2mm]node24.north);
+
+\draw [-Triangle] ([yshift=-2mm]node31.south) -- ([yshift=2mm]node41.north);
+\draw [-Triangle] ([yshift=-2mm]node32.south) -- ([yshift=2mm]node42.north);
+\draw [-Triangle] ([yshift=-2mm]node33.south) -- ([yshift=2mm]node43.north);
+\draw [-Triangle] ([yshift=-2mm]node34.south) -- ([yshift=2mm]node44.north);
+
+\draw [Triangle-] ([xshift=1.1cm]node24.east) -- ([xshift=-1.1cm]nodec.west);
+
+
+\draw[ultra thick] ([yshift=-1mm,xshift=-10mm]node11.south) -- ([yshift=5mm,xshift=-10mm]node11.north) -- ([yshift=5mm]node11.north) -- ([yshift=5mm, xshift=10mm]node14.north) -- ([yshift=-1mm,xshift=10mm]node14.south);
+\draw[] ([yshift=-1mm,xshift=-7mm]node11.south) -- ([yshift=-1mm,xshift=7mm]node14.south);
+
+\draw[ultra thick] ([yshift=-1mm,xshift=-10mm]node41.north) -- ([yshift=-5mm,xshift=-10mm]node41.south) -- ([yshift=-5mm]node41.south) -- ([yshift=-5mm, xshift=10mm]node44.south) -- ([yshift=-1mm,xshift=10mm]node44.north);
+\draw[] ([yshift=-1mm,xshift=-7mm]node31.south) -- ([yshift=-1mm,xshift=7mm]node34.south);
+
+\draw [-Triangle] (node21.south) to [out=-15,in=195] (node24.south) node[] {};
+\draw [Triangle-] (node31.north) to [out=15,in=-195] (node34.north) node[] {};
+
+\node[below right = .5cm and -8cm of m1, align=center] {Gradient Values};
+\node[above right = .5cm and -8cm of m1, align=center] {Initial Values};
+
+\node[below right = 0mm and 1mm of node22, align=center] {Forward};
+\node[above right = 0mm and 1mm of node32, align=center] {Backward};
+
+\draw [-{Triangle[open]}, double, double distance=4pt] ([yshift=-3mm]nodec.south) to [out=270,in=0] (node34.east); 
+
+\end{tikzpicture}
+\end{document}

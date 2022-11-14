@@ -33,7 +33,7 @@
 % Layer C
 \foreach \i in {1,...,\numlayerC}
 {
-    \node[circle, draw, minimum size = 1cm, fill=orange1 ] (layerC\i) at (8,-6) {};
+    \node[circle, draw, minimum size = 1cm, fill=orange1 ] (layerC\i) at (8,-6) {$\hat y$};
 }
 
 %connect Layer A and Layer B
@@ -53,8 +53,6 @@
       \draw[-Triangle, draw=black!50] (layerB\i) -- (layerC\j);   
     }
 } 
-
-\draw [-Triangle, draw=black!60] (layerC1) -- node[pos=1.5] (arrow) {Output} ++(2,0);
 
 \node[above of=layerA1, align=center, node distance=2.5cm] {Input\\Layer};
 \node[above of=layerB1, align=center, node distance=1.5cm] {Hidden\\Layer};
