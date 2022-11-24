@@ -1,4 +1,4 @@
-\documentclass[border=0.2cm]{standalone}
+\documentclass[border=1cm]{standalone}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, shapes.misc}
@@ -22,10 +22,10 @@
     \node [align=center] (node23) {$z^{[L-1]}$}; &
     \node [align=center] (node24) {$z^{[L]}$}; &
     \\
-    \node [align=center, xshift=-.5cm] (node31) {$\zeta^{[1]}$}; &
-    \node [align=center, xshift=-.5cm] (node32) {$\zeta^{[2]}$}; &
-    \node [align=center, xshift=-.5cm] (node33) {$\zeta^{[L-1]}$}; &
-    \node [align=center, xshift=-.5cm] (node34) {$\zeta^{[L]}$}; &
+    \node [align=center, xshift=-.5cm] (node31) {$\delta^{[1]}$}; &
+    \node [align=center, xshift=-.5cm] (node32) {$\delta^{[2]}$}; &
+    \node [align=center, xshift=-.5cm] (node33) {$\delta^{[L-1]}$}; &
+    \node [align=center, xshift=-.5cm] (node34) {$\delta^{[L]}$}; &
     \\
     \node [align=center] (node41) {($g^{[1]}_W,g^{[1]}_b$)}; &
     \node [align=center] (node42) {($g^{[2]}_W,g^{[2]}_b$)}; &
@@ -67,13 +67,15 @@
 \draw [-Triangle] ([yshift=-2mm]node34.south) -- ([yshift=2mm]node44.north);
 
 
-\node[below right = .7cm and -10cm of m1, align=center] {Gradient Values};
-\node[above right = .7cm and -10cm of m1, align=center] {Initial Values};
+\node[below right = .7cm and -10.5cm of m1, align=center] {Gradient Values};
+\node[above right = .7cm and -11cm of m1, align=center] {Parameter Values};
 
-\node[below right = 0mm and 1mm of node22, align=center] (textforward) {Forward};
-\node[above right = 0mm and 5mm of node32, align=center] {Backward};
+\node[below right = 0mm and 10mm of node22, align=center] (textforward) {Forward};
+\node[above right = 0mm and 15mm of node32, align=center] {Backward};
 
-\node[rounded corners, draw, below right = .8cm and 2cm of node24] (nodec) {Cost : C};
+\node[rounded corners, draw, below right = .8cm and 2cm of node24] (nodec) {Losss : L};
+\node[above left = 2cm and -1.5cm of nodec.west] (nodey) {Y};
+\draw [-Triangle] ([yshift=-2mm]nodey.south) -- ([yshift=2mm, xshift=5mm]nodec.north);
 
 \path (node24_1.east)edge [-Triangle,out=0,in=90] node [midway, anchor=center] {} (nodec.north);
 
