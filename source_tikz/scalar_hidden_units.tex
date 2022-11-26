@@ -1,0 +1,49 @@
+\documentclass[tikz, border=50pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usepackage{xfp}
+\usetikzlibrary{shapes.multipart, shapes.geometric, arrows.meta}
+\usetikzlibrary{matrix, calc, positioning,fit}
+\usepackage{amsmath,xstring}
+
+\begin{document}
+\begin{tikzpicture}
+
+\newcommand\semicircleunit[4]
+{
+    \node [draw, circle, minimum size = #3cm] (circle#4) at (#1,#2){};
+    \draw (#1-.4,#2+#3/2.05) -- (#1-.4,#2-#3/2.05);
+    
+    \pgfmathparse{int(#4-1)} \edef\prev{\pgfmathresult}
+    \IfEq{\prev}{0}%
+    {
+        \node[above left = .1cm and 1.5cm of circle#4, align=center] (text2#4) {$\theta^{[#4]} \epsilon R^p$};
+        \node[left of=circle#4, node distance=1.2cm, align=center, text=red] (text1#4) {$\theta^{{[#4]}^T}x$};
+        \node[right of=circle#4, node distance=.9cm, align=center, text=blue1] (text1#4) {  $\underbrace{\sigma^{[#4]}(\theta^{{[#4]}^T}a^{[\prev]})}$ \\ $a^{[#4]}$};
+    }
+    {
+        \node[above left = .1cm and 1.5cm of circle#4, align=center] (text2#4) {$\theta^{[#4]} \epsilon R$};
+        \node[left of=circle#4, node distance=1.2cm, align=center, text=red] (text1#4) {$\theta^{{[#4]}}a^{[\fpeval{#4-1}]}$};
+        \IfEq{\prev}{3}%
+        {
+            \node[right of=circle#4, node distance=.9cm, align=center, text=blue1] (text1#4) {  $\underbrace{\theta^{{[#4]}}a^{[\prev]}}$ \\ $\hat y =  a^{[#4]}$};
+        }
+        {
+            \node[right of=circle#4, node distance=.9cm, align=center, text=blue1] (text1#4) {  $\underbrace{\sigma^{[#4]}(\theta^{{[#4]}}a^{[\prev]})}$ \\ $a^{[#4]}$};
+        }
+    }
+
+    \draw [-Triangle] (circle#4.west)+(-3cm,0) -- ([xshift=-.2cm]circle#4.west);
+    \draw [-Triangle] (text2#4) -- ++(0, -1.7cm);
+    
+}
+
+\node[align=center] (circle0) at (-6,0) {  $\underbrace{X}_{\huge {\epsilon R^p}}$};
+\semicircleunit{0}{0}{4}{1};
+\semicircleunit{7}{0}{4}{2};
+\semicircleunit{14}{0}{4}{3};
+\semicircleunit{21}{0}{4}{4};
+
+\end{tikzpicture}
+\end{document}
