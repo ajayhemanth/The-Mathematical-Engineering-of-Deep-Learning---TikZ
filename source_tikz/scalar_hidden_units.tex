@@ -5,7 +5,7 @@
 \usepackage{xfp}
 \usetikzlibrary{shapes.multipart, shapes.geometric, arrows.meta}
 \usetikzlibrary{matrix, calc, positioning,fit}
-\usepackage{amsmath,xstring}
+\usepackage{amsmath,amsfonts,xstring}
 
 \begin{document}
 \begin{tikzpicture}
@@ -18,19 +18,19 @@
     \pgfmathparse{int(#4-1)} \edef\prev{\pgfmathresult}
     \IfEq{\prev}{0}%
     {
-        \node[above left = .1cm and 1.5cm of circle#4, align=center] (text2#4) {$\theta^{[#4]} \epsilon R^p$};
-        \node[left of=circle#4, node distance=1.2cm, align=center, text=red] (text1#4) {$\theta^{{[#4]}^T}x$};
-        \node[right of=circle#4, node distance=.9cm, align=center, text=blue1] (text1#4) {  $\underbrace{\sigma^{[#4]}(\theta^{{[#4]}^T}a^{[\prev]})}$ \\ $a^{[#4]}$};
+        \node[above left = .1cm and 1.5cm of circle#4, align=center] (text2#4) {$\theta^{[#4]} \in \mathbb R^p$};
+        \node[left of=circle#4, node distance=1.2cm, align=center, text=red] (text1#4) {$\theta^{{[#4]}^\top}x$};
+        \node[below right=-1.8cm and -1.7cm of circle#4, align=center, text=blue1] (text1#4) {  $\underbrace{\sigma^{[#4]}(\theta^{{[#4]}^\top}a^{[\prev]})}$ \\ $a^{[#4]}$};
     }
     {
-        \node[above left = .1cm and 1.5cm of circle#4, align=center] (text2#4) {$\theta^{[#4]} \epsilon R$};
+        \node[above left = .1cm and 1.5cm of circle#4, align=center] (text2#4) {$\theta^{[#4]} \in \mathbb R$};
         \node[left of=circle#4, node distance=1.2cm, align=center, text=red] (text1#4) {$\theta^{{[#4]}}a^{[\fpeval{#4-1}]}$};
         \IfEq{\prev}{3}%
         {
-            \node[right of=circle#4, node distance=.9cm, align=center, text=blue1] (text1#4) {  $\underbrace{\theta^{{[#4]}}a^{[\prev]}}$ \\ $\hat y =  a^{[#4]}$};
+            \node[below right=-1.8cm and -1.7cm of circle#4, align=center, text=blue1] (text1#4) {  $\underbrace{\theta^{{[#4]}}a^{[\prev]}}$ \\ $\hat y=a^{[#4]}$};
         }
         {
-            \node[right of=circle#4, node distance=.9cm, align=center, text=blue1] (text1#4) {  $\underbrace{\sigma^{[#4]}(\theta^{{[#4]}}a^{[\prev]})}$ \\ $a^{[#4]}$};
+            \node[below right=-1.8cm and -1.7cm of circle#4, align=center, text=blue1] (text1#4) {  $\underbrace{\sigma^{[#4]}(\theta^{{[#4]}}a^{[\prev]})}$ \\ $a^{[#4]}$};
         }
     }
 
@@ -39,11 +39,12 @@
     
 }
 
-\node[align=center] (circle0) at (-6,0) {  $\underbrace{X}_{\huge {\epsilon R^p}}$};
+\node[align=center] (circle0) at (-6,0) {  $\underbrace{X}_{\huge {\in \mathbb R^p}}$};
 \semicircleunit{0}{0}{4}{1};
 \semicircleunit{7}{0}{4}{2};
 \semicircleunit{14}{0}{4}{3};
 \semicircleunit{21}{0}{4}{4};
-
+\draw [-Triangle] (text24) -- ++(0, -1.7cm);
+\draw [-Triangle] (circle4.east) -- ++(+2cm, 0);
 \end{tikzpicture}
 \end{document}

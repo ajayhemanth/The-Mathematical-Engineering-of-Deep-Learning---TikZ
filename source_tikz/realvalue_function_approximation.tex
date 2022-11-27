@@ -16,22 +16,22 @@
 \node[circle, draw, minimum size = 1cm, fill=green1] (layerA0) at (0,-4) {\large {$x$}};
 
 % Layer B
-\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB0) at (6, 1) {$bias=-u_1 $};
-\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB1) at (6, -2) {$bias=-u_2 $};
-\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB2) at (6, -8) {$bias=-u_{r-1} $};
+\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB0) at (6, 1) {bias = $-u_1$};
+\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB1) at (6, -2) {bias = $-u_2$};
+\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB2) at (6, -8) {bias = $-u_{r-1}$};
 
 %layer C
 \draw [thick, loosely dashed] ([yshift=-.3cm]layerB1.south) -- ([yshift=.3cm]layerB2.north);
-\node[circle, draw, minimum size = 1cm, fill=pink1 ] (layerC0) at (12, -4) {};
+\node[circle, draw, minimum size = 1cm, fill=pink1 ] (layerC0) at (12, -4) {$\hat y$};
 
 %connecting between the nodes 
 \foreach \i in {0,1,2}
 {
-      \draw[-Triangle, draw=black!50] (layerA0) -- (layerB\i) node[pos=.5, above] {$1$};  
-      
       \pgfmathparse{\negationorder[0][\i]} \edef\lsign{\pgfmathresult};
       \pgfmathparse{\negationorder[1][\i]} \edef\rsign{\pgfmathresult};
-      \draw[-Triangle, draw=black!50] (layerB\i) -- (layerC0) node[pos=.5, above, sloped] {$s_{\lsign}-s_{\rsign}$};  
+       
+       \draw[-Triangle, draw=black!50] (layerA0) -- (layerB\i) node[pos=.5, above, sloped] {$w^{[1]}_{1,\lsign}=1$};  
+       \draw[-Triangle, draw=black!50] (layerB\i) -- (layerC0) node[pos=.5, above, sloped] {$w^{[2]}_{\lsign,1}=s_{\lsign}-s_{\rsign}$};  
 }
 
 \end{tikzpicture}
