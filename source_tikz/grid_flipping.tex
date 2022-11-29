@@ -1,0 +1,61 @@
+\documentclass[tikz, border=50pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usepackage{amsmath,xstring}
+\usepackage{ifthen}
+\usetikzlibrary{shapes.multipart, shapes.geometric, arrows.meta}
+\usetikzlibrary{matrix, calc, positioning,fit, backgrounds}
+\begin {document}
+
+\begin{tikzpicture}[every node/.style={minimum size=1cm},on grid]
+
+\begin{scope}%[every node/.append style={yslant=0.3},yslant=0.3]
+
+\newcommand\slantarray[5]{
+    \foreach \i in {1,...,#3}{
+        \foreach \j in {1,...,#4}{
+            \node (node-#5\i\j) at (#1+\i-.5, #2-\j+.5) {$#5_{\j,\i}$};
+        }
+    }
+    \draw (#1,#2) grid[step=1] (#1+#3, #2-#4);
+}
+
+\newcommand\fillbg[6]{
+    \begin{scope}[on background layer]
+    \node[rectangle,thick, minimum size=1cm,fill=#5] at (#1+.5+#3,#2-.5-#4){#6};    
+    \end{scope}
+}
+
+\newcommand\lines[5]{
+    \draw[#4, ultra thick] (#1,#2) -- (#1+#3,#2);
+    \draw[#4, ultra thick] (#1+#3,#2) -- (#1+#3,#2-#3);
+    \draw[#4, ultra thick] (#1+#3,#2-#3) -- (#1,#2-#3);
+    \draw[#4, ultra thick] (#1,#2-#3) -- (#1,#2);
+    \pgfmathparse{int(#3-1)} \edef\prev{\pgfmathresult};
+    \foreach \i in {0,...,\prev}{
+        \foreach \j in {0,...,\prev}{
+            \fillbg{#1}{#2}{\i}{\j}{#5}{}
+        }
+    }
+}
+
+\slantarray{0}{0}{3}{3}{x};
+\slantarray{0}{-4}{3}{3}{u};
+\slantarray{6}{-4}{3}{3}{y};
+
+\lines{0}{0}{3}{green2}{green0}
+
+\node [draw, circle, minimum size=1cm, right of = node-x22, node distance=6cm] (circle1) {$*$};
+\node [draw, circle, minimum size=1cm, right of = circle1, node distance=4cm] (circle2) {$\sum$};
+
+\draw[-Triangle, draw=black!50] (node-x32)+(7mm,0) -- ([xshift=-2mm]circle1.west);
+\draw[-Triangle, draw=black!50] (circle1)+(7mm,0) -- ([xshift=-2mm]circle2.west);
+\draw[-Triangle, draw=black!50] (node-u32)+(7mm,0) -- ([xshift=-2mm]node-y12.west) node[pos=.5, below] {Flipping};
+\draw[-Triangle, draw=black!50] (node-y21)+(0,7mm) -- ([yshift=-2mm]circle1.south);
+\draw[-Triangle, draw=black!50] (circle2)+(7mm,0) --  node[pos=1.3] {$y_{1,1}$} ++(3cm,0);
+
+
+\end{scope}
+\end{tikzpicture}
+\end{document}
