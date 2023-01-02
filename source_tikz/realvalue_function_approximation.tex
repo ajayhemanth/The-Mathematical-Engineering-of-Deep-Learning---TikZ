@@ -13,16 +13,16 @@
 \begin{tikzpicture}
  
 % Layer A
-\node[circle, draw, minimum size = 1cm, fill=green1] (layerA0) at (0,-4) {\large {$x$}};
+\node[circle, draw, minimum size = 1cm, fill=green1] (layerA0) at (0,-5) {\large {$x$}};
 
 % Layer B
-\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB0) at (6, 1) {bias = $-u_1$};
-\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB1) at (6, -2) {bias = $-u_2$};
-\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB2) at (6, -8) {bias = $-u_{r-1}$};
+\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB0) at (6, 0) {bias = $-u_1$};
+\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB1) at (6, -3) {bias = $-u_2$};
+\node[circle, draw, minimum size = 2.5cm, fill=blue0 ] (layerB2) at (6, -10) {bias = $-u_{r-1}$};
 
 %layer C
 \draw [thick, loosely dashed] ([yshift=-.3cm]layerB1.south) -- ([yshift=.3cm]layerB2.north);
-\node[circle, draw, minimum size = 1cm, fill=pink1 ] (layerC0) at (12, -4) {$\hat y$};
+\node[circle, draw, minimum size = 1cm, fill=pink1, align=center ] (layerC0) at (12, -5) {\large {$\hat y$}};
 
 %connecting between the nodes 
 \foreach \i in {0,1,2}
