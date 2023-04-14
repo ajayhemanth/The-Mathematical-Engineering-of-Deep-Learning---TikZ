@@ -10,7 +10,7 @@
 
 \begin{tikzpicture}[every node/.style={minimum size=1cm},on grid]
 
-\begin{scope}%[every node/.append style={yslant=0.3},yslant=0.3]
+\begin{scope}
 
 \newcommand\slantarray[5]{
     \foreach \i in {1,...,#3}{
@@ -23,15 +23,15 @@
 
 \newcommand\fillbg[6]{
     \begin{scope}[on background layer]
-    \node[rectangle,thick, minimum size=1cm,fill=#5] at (#1+.5+#3,#2-.5-#4){#6};    
+    \node[rectangle,thick, minimum size=1cm,fill=#5, fill opacity=0.65] at (#1+.5+#3,#2-.5-#4){#6};    
     \end{scope}
 }
 
-\newcommand\lines[5]{
-    \draw[#4, ultra thick] (#1,#2) -- (#1+#3,#2);
-    \draw[#4, ultra thick] (#1+#3,#2) -- (#1+#3,#2-#3);
-    \draw[#4, ultra thick] (#1+#3,#2-#3) -- (#1,#2-#3);
-    \draw[#4, ultra thick] (#1,#2-#3) -- (#1,#2);
+\newcommand\lines[6]{
+    \draw[#4, ultra thick, opacity=#6] (#1,#2) -- (#1+#3,#2);
+    \draw[#4, ultra thick, opacity=#6] (#1+#3,#2) -- (#1+#3,#2-#3);
+    \draw[#4, ultra thick, opacity=#6] (#1+#3,#2-#3) -- (#1,#2-#3);
+    \draw[#4, ultra thick, opacity=#6] (#1,#2-#3) -- (#1,#2);
     \pgfmathparse{int(#3-1)} \edef\prev{\pgfmathresult};
     \foreach \i in {0,...,\prev}{
         \foreach \j in {0,...,\prev}{
@@ -40,21 +40,24 @@
     }
 }
 
-\slantarray{0}{0}{7}{6}{x};
-\slantarray{9}{-2}{3}{3}{u};
-\slantarray{14}{-1}{4}{4}{y};
+\slantarray{5}{0}{7}{6}{x};
+\begin{scope}[yshift=.5cm]
+    \slantarray{0}{-2}{3}{3}{w};
+\end{scope}
+\slantarray{14}{-1}{5}{4}{z};
 
-\lines{0}{0}{3}{green2}{green0}
-\lines{1}{0}{3}{red}{pink1}
 
-\lines{14}{-1}{1}{green2}{green0}
-\lines{15}{-1}{1}{red}{pink1}
+\lines{5}{0}{3}{green3}{green0}{1}
+\lines{6}{0}{3}{red}{pink1}{.4}
 
-\node at (3.5,-6.5) {$\large x$};
-\node at (10.5,-5.5) {$\large u$};
-\node at (16,-5.5) {$\large y$};
+\lines{14}{-1}{1}{green3}{green0}{1}
+\lines{15}{-1}{1}{red}{pink1}{.4}
 
-\node at (8,-3) {$\large \star$};
+\node at (1.5,-5) {$\large x$};
+\node at (8.5,-6.5) {$\large w$};
+\node at (16,-5.5) {$\large z$};
+
+\node at (4,-3) {$\large \star$};
 \node at (13,-3) {$\large =$};
 
 \end{scope}

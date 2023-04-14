@@ -10,12 +10,21 @@
 
 \begin{tikzpicture}[every node/.style={minimum size=1cm},on grid]
 
-\begin{scope}%[every node/.append style={yslant=0.3},yslant=0.3]
+\begin{scope}
 
-\newcommand\slantarray[5]{
+\newcommand\slantarray[7]{
     \foreach \i in {1,...,#3}{
         \foreach \j in {1,...,#4}{
-            \node (node-#5\i\j) at (#1+\i-.5, #2-\j+.5) {$#5_{\j,\i}$};
+            \IfEq{#7}{1}%
+            {
+                \pgfmathparse{int(#3-\i+1)} \edef\pi{\pgfmathresult};  
+                \pgfmathparse{int(#4-\j+1)} \edef\pj{\pgfmathresult};
+            }
+            {
+                \pgfmathparse{int(\i)} \edef\pi{\pgfmathresult};  
+                \pgfmathparse{int(\j)} \edef\pj{\pgfmathresult};
+            }
+            \node (node-#5\i\j) at (#1+\i-.5, #2-\j+.5) {$#6_{\pj,\pi}$};
         }
     }
     \draw (#1,#2) grid[step=1] (#1+#3, #2-#4);
@@ -40,19 +49,19 @@
     }
 }
 
-\slantarray{0}{0}{3}{3}{x};
-\slantarray{0}{-4}{3}{3}{u};
-\slantarray{6}{-4}{3}{3}{y};
+\slantarray{0}{0}{3}{3}{x}{x}{0};
+\slantarray{0}{4}{3}{3}{w}{w}{0};
+\slantarray{6}{4}{3}{3}{y}{w}{1};
 
 \lines{0}{0}{3}{green2}{green0}
 
-\node [draw, circle, minimum size=1cm, right of = node-x22, node distance=6cm] (circle1) {$*$};
+\node [draw, circle, minimum size=1cm, right of = node-x22, node distance=6cm] (circle1) {$\odot$};
 \node [draw, circle, minimum size=1cm, right of = circle1, node distance=4cm] (circle2) {$\sum$};
 
 \draw[-Triangle, draw=black!50] (node-x32)+(7mm,0) -- ([xshift=-2mm]circle1.west);
 \draw[-Triangle, draw=black!50] (circle1)+(7mm,0) -- ([xshift=-2mm]circle2.west);
-\draw[-Triangle, draw=black!50] (node-u32)+(7mm,0) -- ([xshift=-2mm]node-y12.west) node[pos=.5, below] {Flipping};
-\draw[-Triangle, draw=black!50] (node-y21)+(0,7mm) -- ([yshift=-2mm]circle1.south);
+\draw[-Triangle, draw=black!50] (node-w32)+(7mm,0) -- ([xshift=-2mm]node-y12.west) node[pos=.5, above] {Flipping};
+\draw[-Triangle, draw=black!50] (node-y23)+(0,-7mm) -- ([yshift=2mm]circle1.north);
 \draw[-Triangle, draw=black!50] (circle2)+(7mm,0) --  node[pos=1.3] {$y_{1,1}$} ++(3cm,0);
 
 
