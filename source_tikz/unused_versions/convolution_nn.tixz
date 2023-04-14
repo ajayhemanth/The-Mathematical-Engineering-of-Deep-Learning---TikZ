@@ -59,7 +59,6 @@
 
 \draw[dashed] (rect44.north east) -- ([xshift=9cm, yshift=1mm]rect44.north east) -- ([xshift=9.3cm, yshift=5mm]rect411.south east) -- ([xshift=8.3cm, yshift=4mm] rect411.south east) -- cycle;
 
-
 %\node[trapezium, draw = yellow1, fill = yellow1, trapezium stretches=true, trapezium angle=67.5, minimum height=7mm, right of=rect410, node distance=3cm] (t1) {}; 
 
 %\node [draw=yellow1, rotate=42, fill=yellow1, minimum width=1cm, minimum height=5cm, right of=rect416, node distance=2.5cm] (controller1) {};
