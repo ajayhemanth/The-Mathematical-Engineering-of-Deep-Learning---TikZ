@@ -1,0 +1,79 @@
+\documentclass[border=1cm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc}
+\usetikzlibrary{cd, fit, calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usepackage{ifthen}
+\usepackage{medl_colors}
+\usepackage{arrayjob}
+
+\def\words{{
+%    {"1", "2", "", "T_{\text{in}}-1", "T_{\text{in}}"},
+%    {"1", "", "t-1", "t", "", "T_{\text{out}}"},
+    {"1", "2", "", "T_{in}-1", "T_{in}"},
+    {"1", "", "t-1", "t", "", "T_{out}"},
+    {"", "", "\hat y^{\langle t-1 \rangle}", "\hat y^{\langle t \rangle}", "", "<stop>"}
+}}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node[rounded corners, minimum width=10cm, minimum height=1cm] at (6, 2.5) (rect1) {$u^{\langle t \rangle} = \textrm{Attention}_{t} [z_q = s^{\langle t-1\rangle}, z_k = (v^{\langle 1 \rangle},\ldots ,v^{ \langle 
+ T_{in}\rangle}), v = (v^{\langle 1 \rangle},\ldots,v^{ \langle T_{in} \rangle})]$};
+
+\foreach \i in {1,...,5}
+{
+    \pgfmathparse{\i-1}\edef\j{\pgfmathresult};
+    \pgfmathparse{\words[0][\j]} \edef\word{\pgfmathresult};
+
+    \ifthenelse{\i = 3}
+    {
+        \node[] (unit1\i) at (\i*2, 0) {\large ... };
+        \node[] (unit2\i) at (\i*2, -1) {\large ... };
+    }
+    {
+        \node[draw, fill=blue1, rounded corners, minimum width=1cm, minimum height=.5cm] (unit1\i) at (\i*2, 0) { \tiny Unit};
+        \node[draw, fill=blue1, rounded corners, minimum width=1cm, minimum height=.5cm] (unit2\i) at (\i*2, -1) { \tiny Unit};
+        \node[draw, rounded corners, minimum width=1.2cm, minimum height=2cm] at (\i*2, -0.5) (rectbox\i) {};
+        \draw[-Triangle] (rectbox\i.north) -- (rect1.south -| rectbox\i) node[pos=.5, right] {$v^{ \langle \word \rangle}$};
+        \draw[Triangle-] (rectbox\i.south) -- ++(0, -1) node[pos=1.3] {$x^{\langle \word \rangle}$}; 
+
+    }
+
+    \ifnum\i>1
+        \draw[Triangle-] (unit1\j) -- (unit1\i);
+        \draw[-Triangle] (unit2\j) -- (unit2\i);
+    \fi    
+}
+
+\foreach \i in {1,...,6}
+{
+    \pgfmathparse{\i-1}\edef\j{\pgfmathresult};
+    \pgfmathparse{\words[1][\j]} \edef\word{\pgfmathresult};
+    \pgfmathparse{\words[2][\j]} \edef\tword{\pgfmathresult};
+    \ifthenelse{\i=2 \OR \i=5 }
+    {
+        \node[] at (-1+\i*2, 5) (trectbox\i) {\large ... };
+    }
+    {
+        \node[draw, rounded corners, minimum width=1.2cm, minimum height=2cm] at (-1+\i*2, 5) (trectbox\i) {$s^{\langle \word \rangle }$};
+        \node[above of=trectbox\i, node distance=2cm] (twordblock\i) {$\tword$};
+        \ifnum\i>2
+            \draw[-Triangle] (trectbox\i.north) -- (twordblock\i);
+        \fi
+    }   
+    \ifnum\i>1
+        \draw[-Triangle] (trectbox\j) -- (trectbox\i);
+    \fi    
+}
+
+\node [left of=rectbox1, node distance=4cm] { Encoder };
+\node [left of=trectbox1, node distance=3cm] { Decoder };
+
+\draw[-Triangle,thick, looseness=.5] (trectbox3.south) to[out=-90, in=90] ([xshift=-2cm]rect1.north);
+\draw[Triangle-,thick, looseness=.5] (trectbox4.south) to[out=-90, in=90] ([xshift=2mm, yshift=5mm]rect1.west);
+
+\end{tikzpicture}
+\end{document}

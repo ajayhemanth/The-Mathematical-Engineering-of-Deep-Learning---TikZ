@@ -1,0 +1,41 @@
+\documentclass[border=1cm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc}
+\usetikzlibrary{cd, fit, calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usepackage{medl_colors}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node[draw, dashed, ultra thick, draw=fblue, rounded corners, minimum height=1cm, below left = 3cm] (unit01) {\parindent=1cm $x^{\langle 1\rangle }$ \indent$x^{\langle 2\rangle }$  \indent \textcolor{red}{$x^{\langle t\rangle }$} \indent \indent $x^{\langle T\rangle }$};
+
+\node[draw, dashed, ultra thick, draw=fblue, rounded corners, minimum height=1cm, above of=unit01,node distance= 6cm] (unit02) {\parindent=1cm $u^{\langle 1\rangle }$ \indent$u^{\langle 2\rangle }$  \indent \textcolor{red}{$u^{\langle t\rangle }$} \indent \indent $u^{\langle T\rangle }$};
+
+\node[draw, rounded corners, minimum width=4.2cm, minimum height=1cm, above left = 1cm and .5cm of unit01] (head1) {Head 1};
+\node[draw, rounded corners, minimum width=4.2cm, minimum height=1cm, above right = 1cm and .5cm of unit01] (head2) {Head H};
+
+\node[draw, dashed, ultra thick, draw=fyellow, rounded corners, minimum width=4.2cm, minimum height=1cm, above of = head1, node distance = 1.2cm] (tunit01) {\parindent=.3cm $u^{1, \langle 1\rangle }$ \indent \textcolor{red}{$u^{1,\langle t\rangle }$} \indent $u^{1,\langle T\rangle }$};
+\node[draw, dashed, ultra thick, draw=fyellow, rounded corners, minimum width=4.2cm, minimum height=1cm, above of = head2, node distance = 1.2cm] (tunit02) {\parindent=.3cm $u^{H, \langle 1\rangle }$ \indent \textcolor{red}{$u^{H, \langle t\rangle }$} \indent $u^{H, \langle T\rangle }$};
+
+\draw[-Triangle,thick, looseness=.3] ([xshift=-.5cm]unit01.north) to[out=90, in=-90] (head1.south) node[](line1){};
+\draw[-Triangle,thick, looseness=.3] ([xshift=1cm]unit01.north) to[out=90, in=-90] (head2.south) node[](line2){};
+
+\draw[-Triangle,thick, looseness=.3] ([xshift=.5cm]unit01.north) to[out=90, in=-90] ++(1,1);
+\draw[-Triangle,thick, looseness=.3] (unit01.north) to[out=90, in=-90] ++(-1,1);
+
+\draw[-Triangle,thick, looseness=.5] (tunit01.north) to[out=90, in=-90] (unit02.south) node[](line3){};
+\draw[-Triangle,thick, looseness=.5] ([xshift=0cm]tunit02.north) to[out=90, in=-90] ([xshift=.5cm]unit02.south) node[](line4){};
+
+\node[above left = -.5cm and -5cm of line1] {$W_{q}^{1}~~ W_{k}^{1}~~ W_{v}^{1} $};
+\node[above right = -.5cm and -5cm of line2] {$W_{q}^{H} ~~ W_{k}^{H} ~~W_{v}^{H} $};
+\node[above left = -1cm and -5cm of line3] {$W_{c}^H $};
+\node[above right = -1cm and -5cm of line4] {$W_{c}^H $};
+
+\node[above of = unit01, node distance = 2.2cm] {\Huge$...$};
+
+
+\end{tikzpicture}
+\end{document}

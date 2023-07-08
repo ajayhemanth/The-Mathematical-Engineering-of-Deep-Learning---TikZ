@@ -1,0 +1,62 @@
+\documentclass[tikz, border=50pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usepackage{amsmath,xstring}
+\usepackage{ifthen}
+\usetikzlibrary{shapes.multipart, shapes.geometric, arrows.meta, decorations.pathreplacing, calligraphy}
+\usetikzlibrary{matrix, calc, positioning,fit, backgrounds}
+\begin {document}
+\begin{tikzpicture}[node distance=2cm]
+
+\node[rounded corners, draw, inner xsep = 3mm, inner ysep=1cm, fill=blue1, minimum width=10cm,minimum height=8cm] (largerec) at(-.5,0){};
+
+\matrix[row sep=1cm,column sep=1cm] {
+    \node [] (node-11) { $W_{hh}$ }; &
+    \node [] (node-12) { $b_{y}$ }; &
+    \node [ minimum size=0cm] (node-13) {  }; &
+    \node [draw, circle, minimum size=.6cm] (node-14) { $\times$ }; &
+    \node [] (node-15) { $W_{yh}$}; &
+    \\
+    \node [draw, circle, minimum size=.6cm] (node-21) { $\times$ }; &
+    \node [] (node-22) {}; &
+    \node [draw, circle, minimum size=.6cm] (node-23) { $+$ }; &
+    \node [circle, minimum size=.6cm,  xshift=1.5cm] (node-24) { }; &
+    \node [] (node-25) { $S_h(\cdot)$ }; &
+    \\
+    \node [] (node-31) {}; &
+    \node [] (node-32) { $W_{hx}$ }; &
+    \node [draw, circle, minimum size=.6cm] (node-33) { $\times$ }; &
+    \node [draw, circle, minimum size=.6cm,  yshift=1.5cm] (node-34) { $+$ }; &
+    \node [] (node-35) { $b_{h}$ }; &
+    \\
+    };
+
+\node [above of = node-13, node distance = .8cm] (node-03) { $S_{y}(\cdot)$};
+
+\node [rounded corners, draw, fill=orange1, minimum width=1.3cm, minimum height=2cm, above of = node-13, node distance = 3.5cm](rect1)  {$ y ^{\langle{} t \rangle{} } $};
+\node [rounded corners, draw, fill=green1, minimum width=1.3cm, minimum height=2cm, below of = node-33, node distance = 3.5cm](rect2)  {$ x ^{\langle{} t \rangle{} } $};
+\node [rounded corners, draw, fill=blue0, minimum width=1.3cm, minimum height=2cm, left of = node-21, node distance = 2.5cm](rect3)  {$ h ^{\langle{} t-1 \rangle{} } $};
+\node [rounded corners, draw, fill=blue0, minimum width=1.3cm, minimum height=2cm, right of = node-25, node distance = 2.4cm](rect4)  {$ h ^{\langle{} t \rangle{} } $};
+
+\draw[-Triangle] (node-12) |- (node-23);
+\draw[-Triangle] (node-11) -- (node-21);
+\draw[-Triangle] (node-21) |- (node-34);
+\draw[-Triangle] (node-32) -- (node-33);
+\draw[-Triangle] (node-23) -- (node-03);
+\draw[-Triangle] (node-14.west) |- ++(-5mm, 0) |- (node-23);
+\draw[-Triangle] (node-33) -| (node-34);
+\draw[-Triangle] (node-35) |- (node-34);
+\draw[-Triangle] (node-34) |- (node-25);
+\draw[-Triangle] (node-24) -- (node-25);
+\draw[-Triangle] (node-25.north) |- ++(0, 5mm) -| (node-14);
+\draw[-Triangle] (node-15) -- (node-14);
+\draw[-Triangle] (node-13) -- (node-03);
+\draw[-Triangle] (node-03) -- (rect1);
+\draw[-Triangle] (rect2) -- (node-33);
+\draw[-Triangle] (rect3) -- (node-21);
+\draw[-Triangle] (node-25) -- (rect4);
+%\draw[-Triangle] (rect4) -- ++(1,0);
+
+\end{tikzpicture}
+\end{document}
