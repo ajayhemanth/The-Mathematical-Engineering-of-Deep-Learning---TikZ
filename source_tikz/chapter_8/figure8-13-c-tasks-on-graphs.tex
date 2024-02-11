@@ -1,0 +1,69 @@
+\documentclass[border=0.2cm]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usetikzlibrary{graphs,graphdrawing}
+\usegdlibrary{force}
+
+\newcommand\fillbg[7]{
+    \filldraw[#5,rotate=#7] (#1,#2) ellipse (#3cm and #4cm);
+}
+
+
+\begin{document}
+\begin{tikzpicture}
+ % To add labeling and check, change the code in this way
+
+
+ \fillbg{-4}{2.5}{2.5}{1.7}{lightblueshape}{0.2}{-45}
+ \fillbg{4.8}{2.4}{2}{1.75}{lightblueshape}{0.2}{25}
+ \fillbg{7.1}{4.6}{1.5}{2}{lightblueshape}{0.2}{0}
+ \fillbg{1.4}{1.7}{1}{1.5}{lightyellowshape}{0.2}{-25}
+ \fillbg{4.35}{1.25}{1}{1.5}{lightyellowshape}{0.2}{-5}
+ 
+ \begin{scope}[shift={(-1,5)}]
+  \graph[spring layout, nodes={redshape, thick, circle, inner sep=1.5pt,empty nodes},edges={line}]
+  {
+    a -- b-- c -- d -- e  -- f-- a-- g -- h -- i -- j  -- g;
+    e  -- k;
+    e  -- l ;
+    b-- m-- n  -- o-- b;o --  h;n  -- p;n  -- q;d -- r;g -- s;
+  };
+ \end{scope} 
+
+ \begin{scope}[shift={(3,5)}]
+  \graph[spring layout, nodes={redshape, thick, circle, inner sep=1.5pt,empty nodes},edges={line}]
+  {
+    a -- b-- c -- d -- e ;
+    e  -- a-- g -- h -- i;
+    m -- j;
+    b-- m-- n  -- o-- b;o --  h;n  -- p;
+  };
+ \end{scope}
+
+ \begin{scope}[shift={(8,4)}]
+  \graph[spring layout, nodes={redshape, thick, circle, inner sep=1.5pt,empty nodes},edges={line}]
+  {
+    b-- m-- n  -- o-- b;o --  h;n  -- p;
+    a -- e  -- g -- h -- i;d -- o;g -- s;d -- e ;
+  };
+ \end{scope}
+
+ \begin{scope}[shift={(1.5,0.5)}]
+  \graph[spring layout, nodes={blueshape, thick, circle, inner sep=1.5pt,empty nodes},edges={line}]
+  {
+    b-- m-- n  -- o-- b;o --  h;n  -- p;
+    e  -- g -- h -- i;d -- o;g -- s;g -- e ;a -- h;
+  };
+ \end{scope}
+
+  \begin{scope}[shift={(4,0.5)}]
+  \graph[spring layout, nodes={blueshape, thick, circle, inner sep=1.5pt,empty nodes}, edges={line}]
+  {
+    b-- m-- n  -- o-- b;o --  h;n  -- p;
+    e  -- g -- h -- i;d -- o -- g -- s;g -- e ;a -- h;
+  };
+ \end{scope}
+
+\end{tikzpicture}
+\end{document}

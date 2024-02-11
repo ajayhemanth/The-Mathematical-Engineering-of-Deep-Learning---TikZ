@@ -1,0 +1,75 @@
+% \documentclass{article}
+% \usepackage{tikz}
+
+% % Define a savebox for the benzene ring
+% \newsavebox{\benzeneRingBox}
+% \savebox{\benzeneRingBox}{
+%   \begin{tikzpicture}[>=stealth, node distance=1.5cm, every node/.style={circle, draw, fill=green3, minimum size=1cm}]
+%     % Draw benzene ring atoms
+%     \foreach \angle/\label in {60/A, 120/B, 180/C, 240/D, 300/E, 0/F} {
+%       \node (\label) at (\angle:2cm) {};
+%     }
+%     % Draw bonds between benzene ring atoms
+%     \foreach \start/\end in {A/B, B/C, C/D, D/E, E/F, F/A} {
+%       \draw[thick] (\start) -- (\end);
+%     }
+%   \end{tikzpicture}
+% }
+
+% % Define a command for connected benzene rings with a surrounding circle
+% \newcommand{\connectedBenzeneRingsWithCircle}[2]{
+%   \begin{tikzpicture}[>=stealth, thick]
+%     % Draw the surrounding circle
+%     \draw[fill=blue!20] (#1+2,#2) ellipse (8cm and 5cm);
+
+%     % Draw the connected benzene rings at the specified position
+%     \node (ring1) at (#1,#2) {\usebox{\benzeneRingBox}};
+%     \node (ring2) at (#1+4,#2) {\usebox{\benzeneRingBox}};
+%     \node [circle,thick,draw=green3,minimum size=1cm,below of=ring1]{};
+
+%   \end{tikzpicture}
+% }
+
+% \begin{document}
+
+% % Use the command to draw connected benzene rings with a surrounding circle at a specified position (e.g., at (0,0))
+% \connectedBenzeneRingsWithCircle{0}{0}
+
+% \end{document}
+
+% \documentclass[tikz,border=2mm]{standalone}
+% \usetikzlibrary{backgrounds}
+
+% \begin{document}
+% \begin{tikzpicture}[>=stealth, every node/.style={circle, draw, minimum size=8mm, fill=blue!20}]
+
+%   % Generate hexagon nodes
+%   \foreach \i in {1,...,6} {
+%     \pgfmathsetmacro{\angle}{60 * \i}
+%     \node (node\i) at (\angle:2) {\i};
+%   }
+
+%   % Connect the hexagon nodes
+%   \foreach \i in {1,...,5} {
+%     \pgfmathtruncatemacro{\j}{\i + 1}
+%     \draw (node\i) -- (node\j);
+%   }
+%   \draw (node6) -- (node1);
+
+%   % Generate random nodes around the hexagon manually
+%   \foreach \i/\angle in {7/30, 8/90, 9/150, 10/210, 11/270, 12/330} {
+%     \pgfmathsetmacro{\radius}{rand * 1 + 4}
+%     \node (node\i) at (\angle:\radius) {\i};
+%   }
+
+%   % Connect the random nodes to the hexagon without overlapping paths
+%   \foreach \i in {7,...,12} {
+%     \foreach \j in {1,...,6} {
+%       \begin{scope}
+%         \draw[->, shorten >=1mm, shorten <=1mm, opacity=0] (node\i) -- (node\j);
+%       \end{scope}
+%     }
+%   }
+
+% \end{tikzpicture}
+% \end{document}

@@ -1,0 +1,54 @@
+\documentclass[border=0.2cm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc}
+\usetikzlibrary{cd, fit, calc}
+\usetikzlibrary{positioning}
+\usepackage{medl_colors}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node [redshape,circle,minimum size=5mm,node distance=3cm] (node21) {$v_3$};
+\node[blueshape, trapezium, align=center, trapezium angle=80, minimum width=1cm, align=center, shape border rotate=90, right of = node21, node distance=2cm] (node22) {\small Aggregate}; 
+
+%\node [lightgreyshape, minimum width=3cm, right of=node21,node distance=3cm] (node22) { Aggregate};
+\node [lightgreenshape,circle,right of=node22,node distance=3cm,yshift=3cm] (node23) {$v_1$};
+\node [greenshape,circle,right of=node22,node distance=3cm] (node24) {$v_2$};
+\node [yellowshape,circle, right of=node22,node distance=3cm,yshift=-3cm] (node25) {$v_4$};
+
+\node[blueshape, trapezium, align=center, trapezium angle=80, minimum width=1cm, align=center, shape border rotate=100, right of = node23, node distance=2cm] (node26) {\small Aggregate}; 
+
+%\node[lightgreyshape,minimum size=10mm,right of=node23,node distance=1.5cm,yshift=1cm,rotate=30] (node26) {};
+
+\node[blueshape, trapezium, align=center, trapezium angle=80, minimum width=1cm, align=center, shape border rotate=100, right of = node24, node distance=2cm] (node27) {\small Aggregate}; 
+%\node [lightgreyshape,minimum size=10mm,right of=node24,node distance=1.5cm] (node27) {};
+
+\node[blueshape, trapezium, align=center, trapezium angle=80, minimum width=1cm, align=center, shape border rotate=100, right of = node25, node distance=2cm] (node28) {\small Aggregate}; 
+%\node [lightgreyshape,minimum size=10mm,right of=node25,node distance=1.5cm,yshift=-1cm,rotate=-30] (node28) {};
+
+\node [redshape,circle,minimum size=5mm,right of=node26,node distance=2.5cm,yshift=0.7cm] (node29) {$v_3$};
+\node [greenshape,circle,right of=node26,node distance=2.5cm, yshift=-0.7cm] (node30) {$v_2$};
+\node [redshape,circle,right of=node27,node distance=2.5cm,yshift=1cm] (node31) {$v_3$};
+\node [lightgreenshape,circle,right of=node27,node distance=2.5cm] (node32) {$v_1$};
+\node [lightgreyshape,circle,right of=node27,node distance=2.5cm,yshift=-1cm] (node34) {$v_6$};
+\node [redshape,circle,,minimum size=5mm,right of=node28,node distance=2.5cm,yshift=-0.7cm] (node35) {$v_3$};
+\node [lightblueshape,circle,right of=node28,node distance=2.5cm,yshift=0.7cm] (node33) {$v_5$};
+
+\draw[-Triangle,dashed,thickline](node29) -- (node26) {};
+\draw[-Triangle,dashed,thickline](node30) -- (node26) {};
+\draw[-Triangle,dashed,thickline](node31) -- (node27) {};
+\draw[-Triangle,dashed,thickline](node32) -- (node27) {};
+\draw[-Triangle,dashed,thickline](node34) -- (node27) {};
+\draw[-Triangle,dashed,thickline](node35) -- (node28) {};
+\draw[-Triangle,dashed,thickline](node33) -- (node28) {};
+\draw[-Triangle,thickline](node26) -- (node23) {};
+\draw[-Triangle,thickline](node27) -- (node24) {};
+\draw[-Triangle,thickline](node28) -- (node25) {};
+\draw[-Triangle,dashed,thickline](node23) -- ($(node22.east)+(0,0.1)$) {};
+\draw[-Triangle,dashed,thickline](node24) -- (node22.east) {};
+\draw[-Triangle,dashed,thickline](node25) -- ($(node22.east)+(0,-0.1)$) {};
+\draw[-Triangle,thickline](node22) -- (node21) {};
+
+\end{tikzpicture}
+\end{document}

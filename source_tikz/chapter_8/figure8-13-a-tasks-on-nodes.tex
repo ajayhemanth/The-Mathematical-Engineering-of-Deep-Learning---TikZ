@@ -1,0 +1,38 @@
+\documentclass[border=0.2cm]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usetikzlibrary{graphs, graphdrawing}
+\usegdlibrary{force}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{scope}[shift={(-1,3.5)}]
+    \graph[spring layout, nodes={redshape, thick, circle, inner sep=2pt,empty nodes}, node distance = 1cm, edges={line}]
+    {
+      a-- b -- c  -- e -- f -- a ;
+      f -- h -- i -- f -- 13;
+      c -- j -- k -- c -- l;
+    };
+  \end{scope}
+
+  \begin{scope}[shift={(-3,3.5)}]
+    \graph[spring layout, nodes={blueshape, thick, inner sep=2pt, empty nodes}, node distance = 1cm, edges={line}]
+    {
+      1a-- 1b -- 1c -- 1a;
+      1a -- 1e -- 1f -- 1g -- 1a;
+      1e -- 1h -- 1i -- 1j -- 1e;
+      1f -- 1k -- 1l -- 1f;
+    };
+    \end{scope}
+    \node [blueshape, thick, inner sep=2pt,right of=1i,node distance=1cm,yshift=0.25cm,xshift=-0.25cm] (1m) {}; 
+    \node [redshape, thick, circle,inner sep=2pt,below of=1m,node distance=0.25cm,yshift=-0.05cm,xshift=0.05cm] (1ma) {}; 
+    \node [below of=1m, node distance=0.1cm,xshift=0.2cm](question_mark){};
+    \draw[line] (1h) -- (a);
+    \draw[line] (1h) -- (i);
+    
+    \draw[border-red] (question_mark.west) circle (4mm) {};    
+    \draw [dashed, line](1i) -- (question_mark)node [yshift=-1.5mm, sloped, above, pos=1.3] (TextNode) {\tiny?};
+  
+\end{tikzpicture}
+\end{document}

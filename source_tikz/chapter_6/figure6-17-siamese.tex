@@ -1,0 +1,132 @@
+\documentclass[tikz, border=50pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usepackage{amsmath,xstring}
+\usepackage{ifthen}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{medl_colors}
+
+\usetikzlibrary{shapes.multipart, shapes.geometric, arrows.meta, decorations.pathreplacing, calligraphy}
+\usetikzlibrary{matrix, calc, positioning,fit, backgrounds,3d}  
+
+\graphicspath{ {./images/} }
+
+\def\outputs{{0,1000,999,2,1}}
+
+\begin {document}
+\begin{tikzpicture}
+
+\newcommand\cube[7]
+{
+\filldraw[#7] (#1+#4,#2,#3) -- (#1+#4,#2+#5,#3) -- (#1,#2+#5,#3) -- (#1,#2,#3) -- cycle;
+\filldraw[#7] (#1+#4,#2,#3) -- (#1+#4,#2,#3+#6) -- (#1+#4,#2+#5,#3+#6) -- (#1+#4,#2+#5,#3) -- cycle;
+\filldraw[#7] (#1+#4,#2+#5,#3) -- (#1,#2+#5,#3) -- (#1,#2+#5,#3+#6) -- (#1+#4,#2+#5,#3+#6) -- cycle;
+}
+
+\node[canvas is zy plane at x=0,draw,fill=white] (inputpic) at (-2,3,-3) {\includegraphics[scale=.25]{images/kid1.jpeg}};
+\node[style={yslant=0.9,xslant=0}] at (-3,-2,-6) { \Huge $x_a$ };
+\node[] at (10,1) { \theta };
+\cube{0}{0}{0}{.2}{6}{-6}{blueshape}
+\cube{.5}{0}{0}{.2}{6}{-6}{blueshape}
+
+\cube{1.5}{1}{1}{.2}{5}{-5}{greenshape}
+\cube{1.9}{1}{1}{.4}{5}{-5}{blueshape}
+\cube{2.5}{1}{1}{.4}{5}{-5}{blueshape}
+
+\cube{3}{1.5}{.5}{.4}{4}{-4}{greenshape}
+\cube{3.7}{1.5}{.5}{.6}{4}{-4}{blueshape}
+\cube{4.6}{1.5}{.5}{.6}{4}{-4}{blueshape}
+\cube{5.4}{1.5}{.5}{.6}{4}{-4}{blueshape}
+\cube{6.2}{1.5}{.5}{.6}{4}{-4}{blueshape}
+
+\cube{7}{2.1}{.5}{.6}{3}{-3}{greenshape}
+\cube{7.9}{2.1}{.5}{.8}{3}{-3}{blueshape}
+\cube{9}{2.1}{.5}{.8}{3}{-3}{blueshape}
+\cube{10}{2.1}{.5}{.8}{3}{-3}{blueshape}
+\cube{11}{2.1}{.5}{.8}{3}{-3}{blueshape}
+
+\cube{12}{2.7}{.5}{.8}{2}{-2}{greenshape}
+\cube{13}{2.7}{.5}{.8}{2}{-2}{blueshape}
+\cube{14}{2.7}{.5}{.8}{2}{-2}{blueshape}
+\cube{15}{2.7}{.5}{.8}{2}{-2}{blueshape}
+\cube{16}{2.7}{.5}{.8}{2}{-2}{blueshape}
+\cube{17}{3.3}{.5}{.8}{1}{-1.3}{greenshape}
+
+\draw [-Triangle, uthickline] (18, 4) -- node[pos=1.6] {} ++(1.5,0);
+
+\foreach \j in {1,...,6}
+{
+    \ifthenelse{\j > 3}
+    {
+        \pgfmathparse{int(\j)} \edef\pj{\pgfmathresult};
+    }
+    {
+        \pgfmathparse{int(\j-.5)} \edef\pj{\pgfmathresult};
+    }    
+    \node[blueshape, circle, minimum size = .5cm] (column-1\j) at (21, \pj+1) {};
+}
+
+\node[below of = column-11, node distance=1.5cm] { \Huge $f_\theta(x_a)$ };
+
+\draw[thick, dashed] ([yshift=2mm]column-13.north) -- ([yshift=-2mm]column-14.south);
+
+%--------------
+
+\node[canvas is zy plane at x=0,draw,fill=white] (inputpic) at (-2,-9,-3) {\includegraphics[scale=.25]{images/kid2.jpeg}};
+\node[style={yslant=0.9,xslant=0}] at (-3,-14,-6) { \Huge $x_o$ };
+\node[] at (10,-11) { \theta };
+
+\cube{0}{-12}{0}{.2}{6}{-6}{blueshape}
+\cube{.5}{-12}{0}{.2}{6}{-6}{blueshape}
+
+\cube{1.5}{-11}{1}{.2}{5}{-5}{greenshape}
+\cube{1.9}{-11}{1}{.4}{5}{-5}{blueshape}
+\cube{2.5}{-11}{1}{.4}{5}{-5}{blueshape}
+
+\cube{3}{-10.5}{.5}{.4}{4}{-4}{greenshape}
+\cube{3.7}{-10.5}{.5}{.6}{4}{-4}{blueshape}
+\cube{4.6}{-10.5}{.5}{.6}{4}{-4}{blueshape}
+\cube{5.4}{-10.5}{.5}{.6}{4}{-4}{blueshape}
+\cube{6.2}{-10.5}{.5}{.6}{4}{-4}{blueshape}
+
+\cube{7}{-9.9}{.5}{.6}{3}{-3}{greenshape}
+\cube{7.9}{-9.9}{.5}{.8}{3}{-3}{blueshape}
+\cube{9}{-9.9}{.5}{.8}{3}{-3}{blueshape}
+\cube{10}{-9.9}{.5}{.8}{3}{-3}{blueshape}
+\cube{11}{-9.9}{.5}{.8}{3}{-3}{blueshape}
+
+\cube{12}{-9.3}{.5}{.8}{2}{-2}{greenshape}
+\cube{13}{-9.3}{.5}{.8}{2}{-2}{blueshape}
+\cube{14}{-9.3}{.5}{.8}{2}{-2}{blueshape}
+\cube{15}{-9.3}{.5}{.8}{2}{-2}{blueshape}
+\cube{16}{-9.3}{.5}{.8}{2}{-2}{blueshape}
+\cube{17}{-8.7}{.5}{.8}{1}{-1.3}{greenshape}
+
+\draw [-Triangle, uthickline] (18, -8) -- node[pos=1.6] {} ++(1.5, 0);
+
+\foreach \j in {1,...,6}
+{
+    \ifthenelse{\j > 3}
+    {
+        \pgfmathparse{int(\j)} \edef\pj{\pgfmathresult};
+    }
+    {
+        \pgfmathparse{int(\j-.5)} \edef\pj{\pgfmathresult};
+    }    
+    \node[blueshape, circle, minimum size = .5cm] (column-1\j) at (21, \pj-11) {};
+}
+
+\draw[thick, dashed] ([yshift=2mm]column-13.north) -- ([yshift=-2mm]column-14.south);
+\node[below of = column-11, node distance=1.5cm] { \Huge $f_\theta(x_o)$ };
+
+\node[redshape, inner xsep = 2cm, inner ysep=4cm] at(32, -2)(centre_rect){\textbf {\Huge Comparision}};
+\draw [-, uthickline] (22, 4) -| ++(3,0) |- (centre_rect.west);
+\draw [-, uthickline] (22, -8) -| ++(3,0) |- (centre_rect.west);
+\node[below of = centre_rect, node distance=5.7cm] { \Huge $f^c_{\theta_c}(\cdot)$ };
+
+\draw [-Triangle, uthickline] (centre_rect.east) -- node[pos=2.7] {\Huge \texttt{Same}/\texttt{Different}} ++(2, 0);
+
+\end{tikzpicture}
+\end{document}

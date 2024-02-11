@@ -1,0 +1,42 @@
+\documentclass[border=0.2cm]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usetikzlibrary{graphs,graphdrawing}
+\usegdlibrary{force}
+
+
+\begin{document}
+\begin{tikzpicture}
+ % To add labeling and check, change the code in this way
+ % \graph[spring layout, nodes={circle, draw, inner sep=2pt}
+ \begin{scope}[shift={(-1,5)}]
+  \graph[spring layout, nodes={circle, draw, inner sep=1.5pt,empty nodes},edges={line}]
+  {
+    a[blueshape,circle, thick] -- b[redshape,circle, thick]-- c[blueshape,circle, thick] -- d[redshape,circle, thick] -- e [blueshape,circle, thick] -- f[yellowshape,circle, thick]-- a[blueshape,circle, thick]-- g[greenshape,circle, thick] -- h[yellowshape,circle, thick] -- i[blueshape,circle, thick] -- j[blueshape,circle, thick]  -- g[greenshape,circle, thick];
+    e [blueshape,circle, thick] -- k[greenshape,circle, thick];
+    e [blueshape,circle, thick] -- l[redshape,circle, thick] ;
+    b[redshape,circle, thick]-- m[blueshape,circle, thick]-- n[greenshape,circle, thick]  -- o[yellowshape,circle, thick]-- b[redshape,circle, thick];o[yellowshape,circle, thick] --  h[yellowshape,circle, thick];n[greenshape,circle, thick]  -- p[yellowshape,circle, thick];n[greenshape,circle, thick]  -- q[greenshape,circle, thick];d[redshape,circle, thick] -- r[greenshape,circle, thick];g[greenshape,circle, thick] -- s[yellowshape,circle, thick];
+  };
+ \end{scope} 
+
+ \begin{scope}[shift={(3,5)}]
+  \graph[spring layout, nodes={circle, draw, inner sep=1.5pt,empty nodes},edges={line}]
+  {
+    a[blueshape,circle, thick] -- b[redshape,circle, thick]-- c[blueshape,circle, thick] -- d[redshape,circle, thick] -- e [redshape,circle, thick];
+    e [blueshape,circle, thick] -- a[blueshape,circle, thick]-- g[greenshape,circle, thick] -- h[yellowshape,circle, thick] -- i[blueshape,circle, thick];
+    m[blueshape,circle, thick] -- j[blueshape,circle, thick];
+    b[redshape,circle, thick]-- m[blueshape,circle, thick]-- n[greenshape,circle, thick]  -- o[yellowshape,circle, thick]-- b[redshape,circle, thick];o[yellowshape,circle, thick] --  h[yellowshape,circle, thick];n[greenshape,circle, thick]  -- p[yellowshape,circle, thick];
+  };
+ \end{scope}
+
+ \begin{scope}[shift={(8,4)}]
+  \graph[spring layout, nodes={circle, draw, inner sep=1.5pt,empty nodes},edges={line}]
+  {
+    b[redshape,circle, thick]-- m[blueshape,circle, thick]-- n[greenshape,circle, thick]  -- o[yellowshape,circle, thick]-- b[redshape,circle, thick];o[yellowshape,circle, thick] --  h[redshape,circle, thick];n[greenshape,circle, thick]  -- p[yellowshape,circle, thick];
+    a[blueshape,circle, thick] -- e [redshape,circle, thick] -- g[greenshape,circle, thick] -- h[blueshape,circle, thick] -- i[blueshape,circle, thick];d[redshape,circle, thick] -- o[yellowshape,circle, thick];g[greenshape,circle, thick] -- s[yellowshape,circle, thick];d[redshape,circle, thick] -- e [redshape,circle, thick];
+  };
+ \end{scope}
+
+\end{tikzpicture}
+\end{document}

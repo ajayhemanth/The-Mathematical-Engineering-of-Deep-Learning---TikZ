@@ -1,0 +1,42 @@
+\documentclass[border=0.2cm]{standalone}
+
+\usepackage{tikz}
+\usepackage{medl_colors}
+\usetikzlibrary{graphs,graphdrawing}
+\usegdlibrary{force}
+
+
+\begin{document}
+\begin{tikzpicture}
+ % To add labeling and check, change the code in this way
+ % \graph[spring layout, nodes={circle, draw, inner sep=2pt}
+ \begin{scope}[shift={(-3.5,4.5)}]
+  \graph[spring layout, nodes={redshape, circle, thick, inner sep=2pt,empty nodes},node distance = 1cm,  edges={line}]
+  {
+    a-- b -- c  -- a ;
+    f -- h -- i -- f -- 13;
+    c -- j -- k -- c -- l;
+    k -- i;
+  };
+ \end{scope} 
+
+\begin{scope}[shift={(-1,5.5)}]
+  \graph[spring layout, nodes={blueshape, thick, inner sep=2pt,empty nodes},node distance = 1cm, edges={line}]
+  {
+    1a-- 1b -- 1c -- 1a-- 1j -- 1m ;
+    1a -- 1e -- 1f -- 1g -- 1a;
+    1e -- 1h -- 1i -- 1j -- 1e;
+    1f -- 1k -- 1l -- 1f;   
+  };
+ \end{scope}
+
+\node [blueshape, thick, inner sep=2pt,above of=1m,node distance=0.25cm,yshift=0.25cm,xshift=0.5cm] (1ma) {}; 
+\node [blueshape, thick, inner sep=2pt,below of=1m,node distance=0.25cm,yshift=-0.25cm,xshift=0.5cm] (1mb) {}; 
+\draw[line] (j) -- (1g);
+\draw[line] (i) -- (1b);
+\draw [line, dashed](1m) -- (1ma) node[pos=0.2,above]{\tiny ?};
+\draw [line, dashed](1m) -- (1mb) node[pos=0.6,above]{\tiny ?};
+ \node[right of=1m,node distance=0.35cm](1mr) {};
+\draw[border-red] (1mr) circle (0.75cm) {};
+\end{tikzpicture}
+\end{document}

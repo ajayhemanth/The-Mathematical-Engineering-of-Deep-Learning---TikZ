@@ -1,0 +1,29 @@
+\documentclass[border=1cm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc}
+\usetikzlibrary{cd, fit, calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usepackage{medl_colors}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node[draw, dotted, rounded corners, minimum width=8cm, minimum height=1cm, below left = 3cm] (unit01) {\parindent=6.4em $x^{<1>}$ \indent$x^{<2>}$  \indent\indent $---$ \indent $x^{<T>}$};
+\node[draw, rounded corners, minimum width=6cm, minimum height=1cm, above  of=unit01,node distance = 2cm,text width=5cm,align=center] (unit02) {Multi Head \\ Self Attention};
+\node[draw, dotted, rounded corners, minimum width=8cm, minimum height=1cm, above of=unit02,node distance=2 cm] (unit03) {\parindent=6.4em $u_{[1]}^{<1>}$ \indent$u_{[2]}^{<2>}$  \indent\indent $---$ \indent $u_{[T]}^{<T>}$};
+\node [draw, circle, minimum size=.6cm,above of=unit03,node distance=1.5cm] (circle1) { + };
+\node[above of = circle1, node distance = 0.5cm] {Layer Norm};
+\node[draw, dotted, rounded corners, minimum width=8cm, minimum height=1cm, above of=circle1,node distance=2 cm] (unit04) {\parindent=6.4em $u_{[x]}^{<1>}$ \indent$u_{[x]}^{<2>}$  \indent\indent $---$ \indent $u_{[x]}^{<T>}$};
+\node[draw, rounded corners, minimum width=6cm, minimum height=1cm, above  of=unit04,node distance = 2cm,text width=5cm,align=center] (unit05) {Feed Forward Network};
+\node[above of = unit05, node distance = 0.7cm] {\parindent=6.4em$u_{[y]}^{<1>}$\indent \indent $u_{[y]}^{<T>}$};
+\node [draw, circle, minimum size=.6cm,above of=unit05,node distance=2cm] (circle2) { + };
+\node[above of = circle2, node distance = 0.5cm] {Layer Norm};
+\node[draw, dotted, rounded corners, minimum width=8cm, minimum height=1cm, above of=circle2,node distance=2 cm] (unit04) {\parindent=6.4em $a_{[out]}^{<1>}$ \indent$a_{[out]}^{<2>}$  \indent\indent $---$ \indent $a_{[out]}^{<T>}$};
+
+\draw[-Triangle] (unit01) -- (unit02);
+\draw[-Triangle] (unit02) -- (unit03);
+
+\end{tikzpicture}
+\end{document}

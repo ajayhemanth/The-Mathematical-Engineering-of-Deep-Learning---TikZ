@@ -1,0 +1,37 @@
+\documentclass[border=0.2cm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc}
+\usetikzlibrary{cd, fit, calc}
+\usetikzlibrary{positioning}
+\usepackage{medl_colors}
+\begin{document}
+\begin{tikzpicture}
+
+\node [draw,circle,thick,draw=blue1,minimum size=5mm, align=center,text=fred,font=\small] (node11) {s$_0$};
+\node [draw,circle,thick,draw=blue1,minimum size=5mm, align=center,text=fred,node distance=4cm, right of=node11,font=\small] (node12) {s$_1$};
+\node [draw,circle,thick,draw=blue1,minimum size=5mm, align=center,text=fred,node distance=4cm, right of=node12,font=\small] (node13) {s$_2$};
+\node [right of=node13,node distance=1cm](node14){};
+\node [right of=node11,node distance=2cm](node15){};
+\node [right of=node12,node distance=2cm](node16){};
+
+\node [draw,circle,thick,draw=blue1,minimum size=5mm, align=center,text=fred,node distance=2cm, below of=node11,xshift=1cm,font=\small] (node21) {a$_0$};
+\node [draw,circle,thick,draw=blue1,minimum size=5mm, align=center,text=fred,node distance=2cm, right of=node21,font=\small] (node22) {r$_0$};
+\node [draw,circle,thick,draw=blue1,minimum size=5mm, align=center,text=fred,node distance=2cm, below of=node12,xshift=1cm,font=\small] (node23) {a$_1$};
+\node [draw,circle,thick,draw=blue1,minimum size=5mm, align=center,text=fred,node distance=2cm, right of=node23,font=\small] (node24) {r$_1$};
+
+\path (node11) edge[-Triangle,thick]node[text=red,above,font=\tiny,align=center]{Transition\\function\\T$(s_0,a_0,s_1)$}(node12);
+\path (node12) edge[-Triangle,thick]node[text=red,above,font=\tiny,align=center]{Transition\\function\\T$(s_1,a_1,s_2)$}(node13);
+\path (node13) edge[-Triangle,thick]node[]{}(node14);
+\path ($(node13.south)+(0,-1)$) edge[dotted,thick]node[]{}($(node13.south)+(2,-1)$);
+
+\path (node11) edge[bend right=45,thick,-Triangle] node [text=red,text width=1.75cm,font=\tiny,align=left] {Policy\\$\pi(s_0,\cdot)$} (node21.west);
+\path ($(node21.north)+(-0.1,0)$) edge[bend left=60,thick] node [] {} ($(node15.center)+(-0.1,-0.01)$);
+\path ($(node15.center)+(0.1,-0.01)$) edge[bend left=60,thick,-Triangle] node[text=red,font=\tiny,text width=3cm,align=left,pos=0.8] {Reward\\function\\R$(s_0,a_0,s_1)$} ($(node22.north)+(-0.1,-0.01)$);
+
+\path (node12) edge[bend right=45,thick,-Triangle] node [text=red,text width=1.75cm,font=\tiny,align=right,pos=0.2] {Policy\\$\pi(s_1,\cdot)$}(node23.west);
+\path ($(node23.north)+(-0.1,0)$) edge[bend left=60,thick] node [] {} ($(node16.center)+(-0.1,-0.01)$);
+\path ($(node16.center)+(0.1,-0.01)$) edge[bend left=60,thick,-Triangle] node[text=red,font=\tiny,text width=3cm,align=left,pos=0.8] {Reward\\function\\R$(s_1,a_1,s_2)$} ($(node24.north)+(-0.1,-0.01)$);
+
+\end{tikzpicture}
+\end{document}

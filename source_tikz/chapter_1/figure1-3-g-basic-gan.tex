@@ -1,0 +1,30 @@
+\documentclass[border=0.2cm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc}
+\usetikzlibrary{cd, fit, calc}
+\usetikzlibrary{positioning}
+\usepackage{medl_colors}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node[greenshape,cylinder, minimum width=2cm,minimum height = 2cm, shape border rotate = 90,aspect=0.3,align=center,font=\Large] (node_z) at (0,2.5) {Fake \\Images};
+\node[yellowshape,cylinder, minimum width=2cm,minimum height = 2cm, shape border rotate = 90, below of=node_z, node distance=4cm, aspect=0.2,align=center,font=\Large] (node_x) []{Real\\Images};
+\node (rect) [blueshape,minimum width=3cm,minimum height=2cm, align=center, left of=node_z, node distance=5cm, font=\Large] (node_ftheta){{\Large Generator  Network}};
+\node[blueshape,rectangle, align=center, trapezium angle=80, minimum height=1cm,minimum width=6cm,rotate=270, font=\Large] (node_fphi) at (4,0.5) {{{\Large Discriminator Network }}};  
+\node [align=center, right of=node_fphi, node distance=4cm, font=\Large] (predlabel)  {\LARGE \texttt{Fake}/\texttt{Real}};
+
+\node[lightgreyshape,cylinder, minimum width=2cm,minimum height = 2cm, shape border rotate = 90, font=\Large,aspect=0.2,align=center] (node_D) at (-10.5,2.25) {Random\\Noise};
+;
+
+\draw [-Triangle, ubthickline] (node_fphi.north) -- (predlabel.west) node[midway,right] {};
+\draw [-Triangle, ubthickline] (node_z.east) -- (node_fphi.south|-node_z.east) node[midway,right] {};
+\draw [-Triangle, ubthickline] (node_x.east) -- (node_fphi.south|-node_x.east) node[midway,right] {};
+\draw [-Triangle, ubthickline] (node_ftheta.east) -- (node_z.west) node[midway,right] {};
+\draw [-Triangle, ubthickline] ($(node_D.east)+(0,0.2)$) --   (node_ftheta.west) {};
+
+\end{tikzpicture}
+ 
+\end{document}

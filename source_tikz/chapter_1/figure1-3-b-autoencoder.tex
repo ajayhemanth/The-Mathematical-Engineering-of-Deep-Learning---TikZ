@@ -1,0 +1,77 @@
+\documentclass[border = 0.2cm]{standalone}
+ 
+% Required package
+\usepackage{tikz}
+\usepackage{medl_colors}
+
+\begin {document}
+ 
+% Input layer neurons'number
+\newcommand{\inputnum}{8} 
+ 
+% Hidden layer neurons'number
+\newcommand{\hiddennum}{4}  
+
+% Total Hidden layers
+\newcommand{\hiddenlayers}{4}   
+ 
+% Output layer neurons'number
+\newcommand{\outputnum}{4} 
+ 
+\begin{tikzpicture}
+ 
+% Input Layer
+\foreach \i in {1,...,8}
+{
+    \node[greenshape,circle, draw, minimum size = 6mm] (Layer1-\i) at (0,-\i) {};
+}
+
+\foreach \i in {1,...,4}
+{
+    \node[blueshape, circle, draw, minimum size = 6mm] (Layer2-\i) at (3,-\i-2) {};
+}
+
+\foreach \i in {1,...,3}
+{
+    \node[blueshape, circle, draw, minimum size = 6mm] (Layer3-\i) at (5,-\i-2.5) {};
+}
+
+\foreach \i in {1,...,4}
+{
+    \node[blueshape, circle, draw, minimum size = 6mm] (Layer4-\i) at (7,-\i-2) {};
+}
+
+\foreach \i in {1,...,8}
+{
+    \node[redshape, circle, draw, minimum size = 6mm] (Layer5-\i) at (10,-\i) {};
+}
+ 
+\foreach \i in {1,...,8}
+{
+    \foreach \j in {1,...,4}
+    {
+      \draw[line] (Layer1-\i) -- (Layer2-\j); 
+      \draw[line] (Layer5-\i) -- (Layer4-\j); 
+    }
+} 
+
+\foreach \i in {1,...,4}
+{
+    \foreach \j in {1,...,3}
+    {
+      \draw[line] (Layer2-\i) -- (Layer3-\j); 
+      \draw[line] (Layer4-\i) -- (Layer3-\j); 
+    }
+} 
+
+\node[bluelayer, inner xsep = 3.25cm, inner ysep=4.7cm] at(2.5, -4.5)(encoderlayer){};
+\node[redlayer, inner xsep = 3.25cm, inner ysep=4.7cm] at(7.5, -4.6)(decoderlayer){};
+\node[draw=fill-grey, ultra thick, rounded corners, draw, inner xsep = 1cm, inner ysep=2cm] at(5, -4.5)(bottleneck){};
+
+\node[anchor=south west,font=\scriptsize] at ([yshift=2mm, xshift=2mm]encoderlayer.south west) {{\Large {Encoder}}};
+\node[anchor=south east,font=\scriptsize] at ([yshift=2mm, xshift=-2mm]decoderlayer.south east) {{\Large {Decoder}}};
+
+
+\end{tikzpicture}
+ 
+\end {document}

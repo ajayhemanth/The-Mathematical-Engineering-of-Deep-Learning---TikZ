@@ -1,0 +1,68 @@
+\documentclass[border=1cm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc}
+\usetikzlibrary{cd, fit, calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usepackage{medl_colors}
+\begin{document}
+\begin{tikzpicture}
+
+\draw[line width=1.5pt] (-3,2) -- (24,2);
+\node[align=center, font=\Huge, text width=\textwidth, below=0.5cm] at (-2,4) {Shapes};
+
+\node[align=center, font=\Large, text width=\textwidth, below=0.5cm] at (0,2) {Existing};
+\node[align=center, font=\Large, text width=\textwidth, below=0.5cm] at (6,2) {Proposed};
+
+
+\draw[-Triangle] (-2,0) -- (2,0) node[midway, below] {black, thin};
+\draw[-Triangle, draw=black!50, thick] (4,0) -- (8,0) node[midway, below] {\texttt {half black, thick}};
+
+\node[draw, minimum width=4cm, minimum height=2cm, align=center] (rect11) at (0,-3) {thin\\black border};
+\node[draw, minimum width=4cm, minimum height=2cm, align=center, draw=black!50, thick] (rect12) at (6,-3) {\texttt {half black thick border}};
+
+\node[fill=fred!80, draw=black, minimum width=4cm, minimum height=2cm, align=center] (rect21) at (0,-6) {thin black border};
+\node[minimum width=4cm, minimum height=2cm, align=center, draw=fred, ultra thick, fill=fred!80] (rect22) at (6,-6) {\texttt {darker accent thick border}};
+\node[minimum width=4cm, minimum height=2cm, align=center, draw=black!50, thick, fill=fred!80] (rect23) at (12,-6) {\texttt {half black thick border}};
+\node[minimum width=4cm, minimum height=2cm, align=center, draw=fred!80, fill=fred!80] (rect24) at (18,-6) {\texttt {no border}};
+
+\node[fill=fblue!80, circle, minimum size=2cm, below of = rect21, node distance = 3cm] (circle31) {thin black \\ border};
+\node[fill=fblue!80, ultra thick, draw=fblue, circle, minimum size=2cm, align=center, below of = rect22, node distance = 3cm] (circle32) {\texttt {darker accent} \\  \texttt{thick border}};
+%\node[fill=fblue!80, draw=black!50, thick, circle, minimum size=2cm, align=center, below of = rect23, node distance = 3cm] (circle33) {\texttt {half black} \\ \texttt{thick border}};
+%\node[fill=fblue!80, draw=fblue, circle, minimum size=2cm, below of = rect24, node distance = 3cm] (circle34) {\texttt {no border}};
+
+\draw[line width=1.5pt] (-3,-13) -- (24,-13);
+\node[align=center, font=\Huge, text width=\textwidth, below=0.5cm] at (-2,-11) {Colors};
+
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=fred!80, fill=fred!60, below of = circle31, node distance = 6cm, ultra thick, line width=3mm] (color41) {\texttt {Dark}};
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=redlight, fill=redlight!80, below of =circle32, node distance = 6cm, ultra thick, line width=3mm] (color42) {\texttt { Light}};
+%\node[minimum width=4cm, minimum height=1cm, align=center, draw=fred, fill=fred!80, below of = circle33, node distance = 6cm] (color43) {\texttt { Dark}};
+%\node[minimum width=4cm, minimum height=1cm, align=center, draw=orange1, fill=orange1, below of = circle34, node distance = 6cm] (color44) {\texttt { option3}};
+
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=fblue, fill=fblue!80, below of = color41, node distance = 2cm, ultra thick, line width=3mm] (color51) {\texttt {Dark}};
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=blue0, fill=blue0!80, below of = color42, node distance = 2cm, ultra thick, line width=3mm] (color52) {\texttt { Light}};
+%\node[minimum width=4cm, minimum height=1cm, align=center, draw=blue1, fill=blue1, below of = color43, node distance = 2cm] (color53) {\texttt { option3}};
+%\node[minimum width=4cm, minimum height=1cm, align=center, draw=fblue, fill=fblue, below of = color44, node distance = 2cm] (color54) {\texttt { option2}};
+
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=fgreen, fill=fgreen!80, below of = color51, node distance = 2cm, ultra thick, line width=3mm] (color61) {\texttt {Dark}};
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=green0, fill=green0!80, below of = color52, node distance = 2cm, ultra thick, line width=3mm] (color62) {\texttt { Light}};
+%\node[minimum width=4cm, minimum height=1cm, align=center, draw=green1, fill=green1, below of = color53, node distance = 2cm] (color63) {\texttt { option3}};
+%\node[minimum width=4cm, minimum height=1cm, align=center, draw=fgreen, fill=fgreen, below of = color52, node distance = 2cm] (color62) {\texttt { option2}};
+
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=fyellow, fill=fyellow!80, below of = color61, node distance = 2cm, ultra thick, line width=3mm] (color71) {\texttt {Dark}};
+%\node[minimum width=4cm, minimum height=1cm, align=center, draw=fyellow, fill=fyellow, below of = color62, node distance = 2cm] (color72) {\texttt { Light}};
+%\node[minimum width=4cm, minimum height=1cm, align=center, draw=yellow1, fill=yellow1, below of = color63, node distance = 2cm] (color73) {\texttt { option3}};
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=yellow2, fill=yellow2!80, below of = color62, node distance = 2cm, ultra thick, line width=3mm] (color72) {\texttt { Light}};
+
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=black!70, fill=black!50, below of = color71, node distance = 2cm, ultra thick, line width=3mm] (color81) {\texttt {Dark}};
+
+\node[minimum width=4cm, minimum height=1cm, align=center, draw=black!50, fill=black!30, below of = color72, node distance = 2cm, ultra thick, line width=3mm] (color82) {\texttt {Light}};
+
+\draw[line width=1.5pt] (-3,-27) -- (24,-27);
+\node[align=center, font=\Huge, text width=\textwidth, below=0.5cm] at (-2,-25) {Flows};
+
+
+
+\end{tikzpicture}
+\end{document}
